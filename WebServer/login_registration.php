@@ -9,7 +9,7 @@ $creds['password']=$pass;
 require ('../path.inc');
 require ('../get_host_info.inc');
 require ('../rabbitMQLib.inc');
-$phpClient = new rabbitMQClient("../testRabbitMQ.ini","testServer");
+$phpClient = new rabbitMQClient("../testRabbitMQ.ini","authRequest");
 $response = $phpClient -> send_request ($creds);
 if($response==true)
 {
