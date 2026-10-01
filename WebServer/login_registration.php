@@ -21,12 +21,12 @@ $phpClient = new rabbitMQClient("../authBroker.ini",$login_registration_server);
 $response = $phpClient -> send_request ($creds);
 if($response==true)
 {
-echo "success";
-print($response);
+echo "success<br>";
+print_r($response);
 }
 else
 {
-echo "fail";
-print($response);
+echo "fail<br>";
+print_r($response);
 }
 ?>
