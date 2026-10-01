@@ -22,9 +22,11 @@ $response = $phpClient -> send_request ($creds);
 if($response==true)
 {
 echo "success";
+print_r($response);
 }
 else
 {
 echo "fail";
+print_r($response);
 }
 ?>
