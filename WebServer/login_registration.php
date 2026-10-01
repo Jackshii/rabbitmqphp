@@ -9,7 +9,15 @@ $creds['password']=$pass;
 require ('../path.inc');
 require ('../get_host_info.inc');
 require ('../rabbitMQLib.inc');
-$phpClient = new rabbitMQClient("../testRabbitMQ.ini","authRequest");
+if ($login_registration ==='registration')
+{
+    $login_registration_server="registrationServer";
+}
+else
+{
+    $login_registration_server="loginServer";
+}
+$phpClient = new rabbitMQClient("../authBroker.ini",$login_registration_server);
 $response = $phpClient -> send_request ($creds);
 if($response==true)
 {
