@@ -12,10 +12,11 @@ class rabbitMQServer
 	private $VHOST;
 	private $exchange;
 	private $queue;
-	private $routing_key = '*';
-	private $exchange_type = "topic";
+	private $routing_key;
+	private $exchange_type;
 	private $auto_delete = false;
 
+	//added requirements for the exchange type and routing key
 	function __construct($machine, $server = "rabbitMQ")
 	{
 		$this->machine = getHostInfo(array($machine));
@@ -23,26 +24,32 @@ class rabbitMQServer
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
 		$this->USER     = $this->machine[$server]["USER"];
 		$this->PASSWORD = $this->machine[$server]["PASSWORD"];
-		$this->VHOST = $this->machine[$server]["VHOST"];
-		if (isset( $this->machine[$server]["EXCHANGE_TYPE"]))
-		{
-			$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
-		}
+		$this->VHOST = $this->machine[$server]["VHOST"];		
+		$this->exchange = $this->machine[$server]["EXCHANGE"];
+		$this->queue = $this->machine[$server]["QUEUE"];
+		$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
+		$this->routing_key = $this->machine[$server]["ROUTING_KEY"];
+
 		if (isset( $this->machine[$server]["AUTO_DELETE"]))
 		{
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
-		$this->exchange = $this->machine[$server]["EXCHANGE"];
-		$this->queue = $this->machine[$server]["QUEUE"];
+
+
 	}
 
 	function process_message($msg)
+	{		
+//Got rid of this section because we do not need it to check if the routing key is other than * since we are need one now
+/*
 	{
 		// send the ack to clear the item from the queue
 		if ($msg->getRoutingKey() !== "*")
     {
       return;
-    }
+		}
+ */
+
     $this->conn_queue->ack($msg->getDeliveryTag());
 		try
 		{
@@ -76,7 +83,8 @@ class rabbitMQServer
 			$replykey = $this->routing_key.".response";
 			$conn_queue->bind($exchange->getName(),$replykey);
 			$exchange->publish(json_encode($response),$replykey,AMQP_NOPARAM,array('correlation_id'=>$msg->getCorrelationId()));
-
+			//added disconnect to close connection once reply has been sent
+			$conn->disconnect();
 				return;
 			}
 		}
@@ -144,10 +152,12 @@ class rabbitMQClient
 	private $VHOST;
 	private $exchange;
 	private $queue;
-	private $routing_key = '*';
+	private $routing_key;
 	private $response_queue = array();
-	private $exchange_type = "topic";
-
+	private $exchange_type;
+	private $auto_delete = false;
+	
+	//added a requirement for ROUTING KEY AND EXCHANGE TYPE
 	function __construct($machine, $server = "rabbitMQ")
 	{
 		$this->machine = getHostInfo(array($machine));
@@ -155,25 +165,26 @@ class rabbitMQClient
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
 		$this->USER     = $this->machine[$server]["USER"];
 		$this->PASSWORD = $this->machine[$server]["PASSWORD"];
-		$this->VHOST = $this->machine[$server]["VHOST"];
-		if (isset( $this->machine[$server]["EXCHANGE_TYPE"]))
-		{
-			$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
-		}
+		$this->VHOST = $this->machine[$server]["VHOST"];		
+		$this->exchange = $this->machine[$server]["EXCHANGE"];
+		$this->queue = $this->machine[$server]["QUEUE"];
+		$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
+		$this->routing_key = $this->machine[$server]["ROUTING_KEY"];
+
 		if (isset( $this->machine[$server]["AUTO_DELETE"]))
 		{
 			$this->auto_delete = $this->machine[$server]["AUTO_DELETE"];
 		}
-		$this->exchange = $this->machine[$server]["EXCHANGE"];
-		$this->queue = $this->machine[$server]["QUEUE"];
-	}
 
+
+	}
 	function process_response($response)
 	{
 		$uid = $response->getCorrelationId();
 		if (!isset($this->response_queue[$uid]))
 		{
-		  echo  "unknown uid\n";
+		//this will tell rabbit that a reply has been taken care of allowing the broker to delete it	
+		  $this->conn_queue->ack($response->getDeliveryTag());
 		  return true;
 		}
     $this->conn_queue->ack($response->getDeliveryTag());
