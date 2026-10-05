@@ -20,11 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phpClient = new rabbitMQClient("../authBroker.ini", "loginServer");
     $response = $phpClient -> send_request ($creds);
    
-    if($response === true){
-    $message = "Success";
-    }
-    else{
-    $message = "Failed";
+    if (is_array($response) && $response[0] == 'success') {
+        $message = "Success";
+    } elseif (is_array($response) && $response[0] == 'error') {
+        $message = "Failed";
     }
 }
 ?>

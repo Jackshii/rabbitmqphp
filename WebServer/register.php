@@ -22,11 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response = $phpClient -> send_request ($creds);
    
 
-    if($response == true){
-    $message = "Success";
-    }
-    else{
-    $message = "Failed";
+    if (is_array($response) && $response[0] == 'success') {
+        $message = "Success";
+    } elseif (is_array($response) && $response[0] == 'duplicate') {
+        $message = "Duplicate";
+    } elseif (is_array($response) && $response[0] == 'error') {
+        $message = "Failed";
     }
 }
 ?>
@@ -93,13 +94,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>
                             <?php    }
+                                elseif ($message === "Duplicate"){
+                            ?>        
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">User Already Exists!</div>
+                                </div>
+                            <?php        
+                                    }
                                 elseif ($message === "Failed"){
                             ?>        
                                 <div class="d-flex justify-content-center">
                                     <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Failed!</div>
                                 </div>
-                            <?php        
-                                    }
+                            <?php
+                                }
                             ?>
                             <form action="register.php" method="POST">
                                 <!-- <div class="mb-3">
