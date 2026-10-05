@@ -81,12 +81,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="card-body">
                             <?php
                                 if ($message === "Success"){
+                                                                        print_r($response);
+
                             ?>
                                 <div class="d-flex justify-content-center">
                                     <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Login Successful!</div>
                                 </div>
                             <?php    }
                                 elseif ($message === "Failed"){
+                                                                        print_r($response);
+
                             ?>        
                                 <div class="d-flex justify-content-center">
                                     <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Login Failed!</div>
