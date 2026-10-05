@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    // require_once ('../authBrooker.ini');
 
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -20,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phpClient = new rabbitMQClient("../authBroker.ini", "registrationServer");
     $response = $phpClient -> send_request ($creds);
    
-    if($response === true){
+
+    if($response == true){
     $message = "Success";
     }
     else{
