@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 if ($message === "Failed"){
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Login Failed! <?php print_r($response); ?></div>
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Login Failed!</div>
                                 </div>
                             <?php        
                                     }

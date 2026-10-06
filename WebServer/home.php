@@ -47,6 +47,13 @@ if (!isset($_SESSION['sessionToken'])) {
                             <li class="nav-item">
                                 <a class="nav-link text-dark fs-5" href="XXXXXXXXX">TEMP 3</a>
                             </li>
+                            <!-- LOGOUT BUTTON -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark fs-5" href="xxxxxx" data-bs-toggle="dropdown"><?php echo $_SESSION['username'] ?></a>
+                                <ul class="dropdown-menu play-dropdown text-center">
+                                    <li><a class="dropdown-item text-dark" href="logout.php">Logout</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>

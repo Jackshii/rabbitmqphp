@@ -102,7 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 elseif ($message === "Duplicate"){
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">User Already Exists!</div>
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">
+                                        User Already Exists!
+                                        <a class="text-decoration-underline" href="index.php">Back to Home!</a>
+                                    </div>
                                 </div>
                             <?php        
                                     }
