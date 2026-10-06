@@ -1,6 +1,13 @@
 <?php
 //REGISTRATION PAGE FORM WITH REGISTER LOGIC
 
+session_start();
+
+if (isset($_SESSION['sessionToken'])) {
+    header("Location: home.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $message = "";
 }
@@ -8,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
-    // require_once ('../authBrooker.ini');
 
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -16,17 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $creds = array();
     $creds['user'] = $username;
     $creds['password'] = $password;
-    $creds['login_registration'] ='registration';
+    $creds['login_registration'] ='registration'; //possible get rid of
 
     $phpClient = new rabbitMQClient("../authBroker.ini", "registrationServer");
     $response = $phpClient -> send_request ($creds);
-   
 
-    if (is_array($response) && $response[0] == 'success') {
+    if (is_array($response) && $response[0] === 'success') {
         $message = "Success";
-    } elseif (is_array($response) && $response[0] == 'duplicate') {
+    } elseif (is_array($response) && $response[0] === 'duplicate') {
         $message = "Duplicate";
-    } elseif (is_array($response) && $response[0] == 'error') {
+    } else {
         $message = "Failed";
     }
 }
@@ -41,13 +46,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
     <body class="d-flex flex-column min-vh-100">
-        <header>
+        <!-- <header>
             <nav class="navbar navbar-expand-md text-black shadow-sm border-bottom bg-white">
                 <div class="container-fluid px-5">
                     <a class="navbar-brand" href="index.html">
                         PROJECT NAME
-                        <!-- Will Use for Logo Top Left Later If Needed
-                        <img src="XXXXXXXXX" alt="XXXXXXXXX" class="img-fluid logo"> -->
+                        Will Use for Logo Top Left Later If Needed
+                        <img src="XXXXXXXXX" alt="XXXXXXXXX" class="img-fluid logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                         <span class="navbar-toggler-icon"></span>
@@ -56,14 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <ul class="navbar-nav ms-auto gap-2 text-center">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-dark fs-5" href="#" data-bs-toggle="dropdown">TEMP 1</a>
-                                <!-- SUBMENU if needed later
+                                SUBMENU if needed later
                                 <ul class="dropdown-menu play-dropdown text-center">
                                     <li><a class="dropdown-item text-dark" href="XXXXXXXXX">TEMP</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXX">TEMP</a></li>
-                                </ul> -->
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark fs-5" href="XXXXXXXXX">TEMP 2</a>
@@ -75,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
             </nav>
-        </header>
+        </header> -->
         
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
@@ -89,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="d-flex justify-content-center">
                                     <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Successful!
                                         <div>
-                                            <a class="text-decoration-underline" href="login.php">Login here <?php print_r($response);?></a>
+                                            <a class="text-decoration-underline" href="login.php">Login here</a>
                                         </div>
                                     </div>
                                 </div>
@@ -97,15 +102,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 elseif ($message === "Duplicate"){
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">User Already Exists!<?php print_r($response);?></div>
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">User Already Exists!</div>
                                 </div>
                             <?php        
                                     }
                                 elseif ($message === "Failed"){
-
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Failed!<?php print_r($response);?></div>
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Failed!</div>
                                 </div>
                             <?php
                                 }
