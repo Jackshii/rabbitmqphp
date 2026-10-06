@@ -29,10 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (is_array($response) && $response[0] === 'success') {
         $message = "Success";
+        echo "SUCCESS"; //debug
+
     } elseif (is_array($response) && $response[0] === 'duplicate') {
         $message = "Duplicate";
+        echo "DUPE"; //debug
+
     } else {
         $message = "Failed";
+        echo "FAILED"; //debug
+
     }
 }
 ?>
@@ -84,8 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-10 col-lg-6">
-                    <div class="card rounded-0">
+                <div class="col-10 col-lg-6 mt-5">
+                    <div class="card rounded-0 mt-5">
                         <h3 class="card-header text-center">Create Account</h3>
                         <div class="card-body">
                             <?php
@@ -102,14 +108,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 elseif ($message === "Duplicate"){
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">User Already Exists!</div>
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">User Already Exists!<?php print_r($response); ?></div>
                                 </div>
                             <?php        
                                     }
                                 elseif ($message === "Failed"){
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Failed!</div>
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Failed!<?php print_r($response); ?></div>
                                 </div>
                             <?php
                                 }
