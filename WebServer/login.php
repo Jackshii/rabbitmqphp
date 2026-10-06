@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phpClient = new rabbitMQClient("../authBroker.ini", "loginServer");
     $response = $phpClient -> send_request ($creds);
    
-    if (is_array($response) && $response[0] === 'success') {
+    if (is_array($response) && $response[0] == 'success') {
         echo "SUCCESS"; //debug
         $message = "Success";
         $_SESSION['sessionToken'] = $response[1];
