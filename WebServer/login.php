@@ -28,8 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
     if (is_array($response) && $response['status'] == 'success') {
         $message = "Success";
-        $_SESSION['sessionToken'] = $response[1];
-        $_SESSION['username'] = $response[2];
+        echo "SUCCESFULL LOGIN";
+        $_SESSION['sessionToken'] = $response['session_key'];
+        $_SESSION['username'] = $response['username'];
         header("Location: home.php");
         exit();
     } else {
