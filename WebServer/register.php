@@ -27,18 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phpClient = new rabbitMQClient("../authBroker.ini", "registrationServer");
     $response = $phpClient -> send_request ($creds);
 
-    if (is_array($response) && $response[0] == 'success') {
+    if (is_array($response) && $response['status'] == 'success') {
         $message = "Success";
-        echo "SUCCESS"; //debug
-
-    } elseif (is_array($response) && $response[0] == 'duplicate') {
+    } elseif (is_array($response) && $response['status'] == 'duplicate') {
         $message = "Duplicate";
-        echo "DUPE"; //debug
-
     } else {
         $message = "Failed";
-        echo "FAILED"; //debug
-
     }
 }
 ?>
