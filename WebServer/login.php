@@ -1,4 +1,44 @@
-<!-- INDEX USES BOOTSTRAP (Responsive) and has extra elements if needed later - Jake -->
+<?php
+//LOGIN PAGE FORM WITH LOGIN LOGIC
+session_start();
+
+if (isset($_SESSION['sessionToken'])) {
+    header("Location: home.php");
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $message = "";
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    require ('../path.inc');
+    require ('../get_host_info.inc');
+    require ('../rabbitMQLib.inc');
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $creds = array();
+    $creds['user'] = $username;
+    $creds['password'] = $password;
+    $creds['login_registration'] ='login';
+
+    $phpClient = new rabbitMQClient("../authBroker.ini", "loginServer");
+    $response = $phpClient -> send_request ($creds);
+   
+    if (is_array($response) && $response['status'] == 'success') {
+        $message = "Success";
+        echo "SUCCESFULL LOGIN";
+        $_SESSION['sessionToken'] = $response['session_key'];
+        $_SESSION['username'] = $response['username'];
+        header("Location: home.php");
+        exit();
+    } else {
+        $message = "Failed";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -8,13 +48,13 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
     <body class="d-flex flex-column min-vh-100">
-        <header>
+        <!-- <header>
             <nav class="navbar navbar-expand-md text-black shadow-sm border-bottom bg-white">
                 <div class="container-fluid px-5">
                     <a class="navbar-brand" href="index.html">
                         PROJECT NAME
-                        <!-- Will Use for Logo Top Left Later If Needed
-                        <img src="XXXXXXXXX" alt="XXXXXXXXX" class="img-fluid logo"> -->
+                        Will Use for Logo Top Left Later If Needed
+                        <img src="XXXXXXXXX" alt="XXXXXXXXX" class="img-fluid logo">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                         <span class="navbar-toggler-icon"></span>
@@ -23,15 +63,14 @@
                         <ul class="navbar-nav ms-auto gap-2 text-center">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-dark fs-5" href="#" data-bs-toggle="dropdown">TEMP 1</a>
-                                
-                                <!-- SUBMENU if needed later
+                                SUBMENU if needed later
                                 <ul class="dropdown-menu play-dropdown text-center">
                                     <li><a class="dropdown-item text-dark" href="XXXXXXXXX">TEMP</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXX">TEMP</a></li>
-                                </ul> -->
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark fs-5" href="XXXXXXXXX">TEMP 2</a>
@@ -43,21 +82,38 @@
                     </div>
                 </div>
             </nav>
-        </header>
-
+        </header> -->
+        
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-8 col-lg-6">
-                    <div class="card rounded-0 shadow-sm">
-                        <h3 class="card-header text-center">Welcome To PROJECT NAME</h3>
+                <div class="col-10 col-lg-6 mt-5">
+                    <div class="card rounded-0 mt-5">
+                        <h3 class="card-header text-center">Login Here</h3>
                         <div class="card-body">
-                            <h5 class="card-text text-center text-decoration-underline">Please Login Or Register Below</h5>
-                             <div class="text-center mt-4 mb-3">
-                                <a href="XXXXXXXXXXXXXX" class="btn btn-lg rounded-0 border-dark border-3 fs-5">Login</a>
-                            </div>
-                             <div class="text-center mt-4 mb-2">
-                                <a href="XXXXXXXXXXX" class="btn btn-lg rounded-0 border-dark border-3 fs-5">Register</a>
-                            </div>
+                            <?php    
+                                if ($message === "Failed"){
+                            ?>        
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Login Failed!</div>
+                                </div>
+                            <?php        
+                                    }
+                            ?>
+                            <form action="login.php" method="POST">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" name="username" maxlength="30" class="form-control" id="username" placeholder="Your username" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" name="password" maxlength="255" class="form-control" id="password" placeholder="Your password" required>
+                                </div>  
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="contact-submit-button btn btn-primary border-dark">Login</button>
+                                </div>
+                                <p class="ms-2 mt-4 mb-0">Don't have an account? Create one below:</p>
+                                <a href="register.php" class="ms-2 mt-0 fs-6">Create account</a>
+                            </form>
                         </div>
                     </div>
                 </div>
