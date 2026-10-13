@@ -31,21 +31,27 @@ if (!isset($_SESSION['sessionToken'])) {
                     <div class="collapse navbar-collapse justify-content-end" id="mainNav">
                         <ul class="navbar-nav ms-auto gap-2 text-center">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark fs-5" href="#" data-bs-toggle="dropdown">TEMP 1</a>
-                                <!-- SUBMENU if needed later -->
+                                <!-- SUBMENU if needed later
+                                <a class="nav-link dropdown-toggle text-dark fs-5" href="XXXXXX" data-bs-toggle="dropdown">XXXXX</a>
                                 <ul class="dropdown-menu play-dropdown text-center">
                                     <li><a class="dropdown-item text-dark" href="XXXXXXXXX">TEMP</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXX">TEMP</a></li>
-                                </ul>
+                                </ul> -->
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" href="XXXXXXXXX">TEMP 2</a>
+                                <a class="nav-link text-dark fs-5" href="search.php">Search</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" href="XXXXXXXXX">TEMP 3</a>
+                                <a class="nav-link text-dark fs-5" href="recommend.php">Recommendations</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" href="favorites.php">Favorites</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link text-dark fs-5" href="restrictions.php">Diet Restrictions</a>
                             </li>
                             <!-- LOGOUT BUTTON -->
                             <li class="nav-item dropdown">
