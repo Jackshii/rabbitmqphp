@@ -8,7 +8,12 @@ function recipeSearch($info)
 {
     $returnRecipesMatch= array();
     $ingred=$info['ingredients'];
+    $diet= $info['diet'];
     $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . $ingred ."&app_id=". $api_id . "&app_key=". $api_key;
+    if(!empty($diet))
+        {
+            $APICall= $APICall . "&diet=" . $diet;
+        }
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipeReturn,true);
     $recipesMatch=$recipesPHP['hits'];
@@ -18,6 +23,6 @@ function recipeSearch($info)
 require('../path.inc');
 require('../get_host_info.inc');
 require('../rabbitMQLib.inc');
-$server= new rabbitMQsServer()
+$server= new rabbitMQServer("../apiBroker.ini","dmzServer")
 $server->process_requests('recipeSearch');
 ?>
