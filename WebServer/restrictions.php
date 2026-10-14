@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!-- HTML BELOW -->
 <?php 
     $pageTitle = 'Dietary Restrictions';
-    require_once('head.php');
+    require_once('../head.php');
 ?>
     <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">

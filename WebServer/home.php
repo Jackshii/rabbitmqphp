@@ -12,7 +12,7 @@ if (!isset($_SESSION['sessionToken'])) {
 <!-- HTML BELOW -->
 <?php 
     $pageTitle = 'Dietary Restrictions';
-    require_once('head.php');
+    require_once('../head.php');
 ?>
 
         <div class="container mt-5 mb-5">
