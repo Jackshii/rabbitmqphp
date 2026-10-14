@@ -3,7 +3,7 @@
 require('../path.inc');
 require('../get_host_info.inc');
 require('../rabbitMQLib.inc');
-$testClient=new rabbitMQClient("rabbitmqphp/DMZ/dmz.php","dmzServer");
+$testClient=new rabbitMQClient("../apiBroker.ini","dmzServer");
 $info_array=array();
 $info_array['search_type']="recipeSearch";
 $info_array['ingredients']="garlic chicken";
