@@ -8,8 +8,8 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         <header>
-            <nav class="navbar navbar-expand-md text-black shadow-sm border-bottom bg-white">
-                <div class="container-fluid px-5">
+            <nav class="navbar navbar-expand-lg text-black shadow-sm border-bottom bg-white">
+                <div class="container-fluid px-3">
                     <a class="navbar-brand" href="home.php">PROJECT NAME</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                         <span class="navbar-toggler-icon"></span>
@@ -28,19 +28,19 @@
                                 </ul>
                             </li> -->
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" href="search.php">Search</a>
+                                <a class="nav-link text-dark text-nowrap" href="search.php">Search</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" href="recommend.php">Recommendations</a>
+                                <a class="nav-link text-dark text-nowrap" href="recommend.php">Recommendations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" href="fridge.php">My Fridge</a>
+                                <a class="nav-link text-dark text-nowrap" href="fridge.php">My Fridge</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" href="savedRecipes.php">My Recipes</a>
+                                <a class="nav-link text-dark text-nowrap" href="savedRecipes.php">My Recipes</a>
                             </li>
                              <li class="nav-item">
-                                <a class="nav-link text-dark fs-5" href="restrictions.php">Diet Restrictions</a>
+                                <a class="nav-link text-dark text-nowrap" href="restrictions.php">Diet Restrictions</a>
                             </li>
                             <!-- LOGOUT BUTTON -->
                             <li class="nav-item dropdown">
