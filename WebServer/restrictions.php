@@ -21,7 +21,7 @@ $request = array();
 $request['type'] = 'getDiet';
 $request['session_key'] = $_SESSION['sessionToken'];
 
-$phpClient = new rabbitMQClient("../authBroker.ini", "restrictionServer");
+$phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
 $response = $phpClient -> send_request ($request);
 
 if (is_array($response) && $response['status'] == 'success') {
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $request['session_key'] = $_SESSION['sessionToken'];
     $request['dietInfo'] = $_POST['diet'] ?? [];
 
-    $phpClient = new rabbitMQClient("../authBroker.ini", "restrictionServer");
+    $phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
     $response = $phpClient -> send_request ($request);
 
     if (is_array($response) && $response['status'] == 'success') {
