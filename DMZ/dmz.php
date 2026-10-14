@@ -23,6 +23,6 @@ function recipeSearch($info)
 require('../path.inc');
 require('../get_host_info.inc');
 require('../rabbitMQLib.inc');
-$server= new rabbitMQServer("../apiBroker.ini","dmzServer")
+$server= new rabbitMQServer("../apiBroker.ini","dmzServer");
 $server->process_requests('recipeSearch');
 ?>
