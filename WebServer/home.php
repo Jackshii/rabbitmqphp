@@ -30,8 +30,8 @@ if (!isset($_SESSION['sessionToken'])) {
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="mainNav">
                         <ul class="navbar-nav ms-auto gap-2 text-center">
+                            <!-- SUBMENU if needed later
                             <li class="nav-item dropdown">
-                                <!-- SUBMENU if needed later
                                 <a class="nav-link dropdown-toggle text-dark fs-5" href="XXXXXX" data-bs-toggle="dropdown">XXXXX</a>
                                 <ul class="dropdown-menu play-dropdown text-center">
                                     <li><a class="dropdown-item text-dark" href="XXXXXXXXX">TEMP</a></li>
@@ -39,8 +39,8 @@ if (!isset($_SESSION['sessionToken'])) {
                                     <li><a class="dropdown-item text-dark small" href="XXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXXX">TEMP</a></li>
                                     <li><a class="dropdown-item text-dark small" href="XXXXXXX">TEMP</a></li>
-                                </ul> -->
-                            </li>
+                                </ul>
+                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link text-dark fs-5" href="search.php">Search</a>
                             </li>
