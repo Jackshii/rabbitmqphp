@@ -8,7 +8,7 @@
     </head>
     <body class="d-flex flex-column min-vh-100">
         <header>
-            <nav class="navbar navbar-expand-lg text-black shadow-sm border-bottom bg-white">
+            <nav class="navbar navbar-expand-md text-black shadow-sm border-bottom bg-white">
                 <div class="container-fluid px-3">
                     <a class="navbar-brand" href="home.php">PROJECT NAME</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
@@ -44,7 +44,7 @@
                             </li>
                             <!-- LOGOUT BUTTON -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark fs-5" data-bs-toggle="dropdown"><?php echo htmlspecialchars($_SESSION['username']) ?></a>
+                                <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown"><?php echo htmlspecialchars($_SESSION['username']) ?></a>
                                 <ul class="dropdown-menu play-dropdown text-center">
                                     <li><a class="dropdown-item text-dark" href="logout.php">Logout</a></li>
                                 </ul>
