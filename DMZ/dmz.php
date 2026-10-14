@@ -9,7 +9,7 @@ function recipeSearch($info)
     $returnRecipesMatch= array();
     $ingred=$info['ingredients'];
     $diet= $info['diet'];
-    $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode(ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
+    $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
     if(!empty($diet))
         {
             $APICall= $APICall . "&diet=" . $diet;
