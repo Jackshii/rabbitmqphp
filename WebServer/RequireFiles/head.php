@@ -44,7 +44,7 @@
                             </li>
                             <!-- LOGOUT BUTTON -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown"><?php echo htmlspecialchars($_SESSION['username']) ?></a>
+                                <a class="nav-link dropdown-toggle text-dark text-nowrap mr-3" data-bs-toggle="dropdown"><?php echo htmlspecialchars($_SESSION['username']) ?></a>
                                 <ul class="dropdown-menu play-dropdown text-center">
                                     <li><a class="dropdown-item text-dark" href="logout.php">Logout</a></li>
                                 </ul>
