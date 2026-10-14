@@ -1,5 +1,4 @@
 <?php
-//LOGIN PAGE FORM WITH LOGIN LOGIC
 session_start();
 
 if (isset($_SESSION['sessionToken'])) {
