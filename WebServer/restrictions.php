@@ -53,6 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php 
     $pageTitle = 'Dietary Restrictions';
     require_once('../head.php');
+    $response = $phpClient -> send_request ($request);
+    $debugLoad = $response;   // DEBUG: remove later
+
 ?>
     <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
