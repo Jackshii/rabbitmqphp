@@ -15,7 +15,7 @@ function recipeSearch($info)
             $APICall= $APICall . "&diet=" . $diet;
         }
     $recipesReturn= file_get_contents($APICall);
-    $recipesPHP=json_decode($recipeReturn,true);
+    $recipesPHP=json_decode($recipesReturn,true);
     $recipesMatch=$recipesPHP['hits'];
     $returnRecipesMatch['recipeSearch']=$recipesMatch;
     return $returnRecipesMatch;
