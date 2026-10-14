@@ -1,19 +1,19 @@
 #!/usr/bin/php
 <?php
-require_once('path.inc');
-require_once('get_host_info.inc');
-require_once('rabbitMQLib.inc');
-require_once('connection.php');
-function register($username, $password) {
+require_once('../path.inc');
+require_once('../get_host_info.inc');
+require_once('../rabbitMQLib.inc');
+require_once('../connection.php');
+function register($user, $pass) {
         global $Host, $User, $Pass, $Name;
         $db = new mysqli($Host, $User, $Pass, $Name);
 
-    $check="select * from logininfo where username = '$username'";
+    $check="select * from logininfo where username = '$user'";
     $checkdup=mysqli_query($db, $check);
     if ($checkdup && $checkdup->num_rows > 0) {
         return ["status" => "duplicate"];
     }
-    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $hash = password_hash($pass, PASSWORD_DEFAULT);
     $sql = "insert into logininfo (username, password) values ('$username', '$hash')" ;
     if ($db->query($sql)) {
         return ["status" => "success"];
@@ -21,13 +21,13 @@ function register($username, $password) {
         return ["status" => "error"] ;
     }
 }
-function request($request) {
+function request($req) {
 	echo "Received registration request:" . PHP_EOL;
-	var_dump($request);
-    $username = $request['user'] ;
-    $password = $request['password'];
-    echo "doing registration process for '$username'" . PHP_EOL;
-    return register($username, $password);
+	var_dump($req);
+    $user = $req['user'] ;
+    $pass = $req['password'];
+    echo "doing registration process for '$user'" . PHP_EOL;
+    return register($user, $pass);
 }
 $server = new rabbitMQServer("authBroker.ini", "registrationServer");
 echo "Registration Listener start" . PHP_EOL;
