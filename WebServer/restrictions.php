@@ -23,6 +23,7 @@ $request['session_key'] = $_SESSION['sessionToken'];
 
 $phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
 $response = $phpClient -> send_request ($request);
+$debugLoad = $response;   // DEBUG: remove later
 
 if (is_array($response) && $response['status'] == 'success') {
     // $savedDiet = $response[ASK ERIC TO SEND BACK AS AN ARRAY]
@@ -53,10 +54,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <?php 
     $pageTitle = 'Dietary Restrictions';
     require_once('../head.php');
-    $response = $phpClient -> send_request ($request);
-    $debugLoad = $response;   // DEBUG: remove later
-
 ?>
+<!-- DEBUG: remove later -->
+<pre class="bg-light border m-3 p-2 small"><?php echo htmlspecialchars(var_export($debugLoad, true)); ?></pre>
+
     <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
