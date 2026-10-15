@@ -212,8 +212,8 @@ class rabbitMQClient
       $params['password'] = $this->PASSWORD;
       $params['vhost'] = $this->VHOST;
       //Add params for both read/connection time out
-      $params['read_timeout'] = 10;
-      $params['connect_timeout'] = 5;
+      $params['read_timeout'] = 20;
+      $params['connect_timeout'] = 10;
 
 
 
