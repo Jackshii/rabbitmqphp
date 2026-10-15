@@ -17,7 +17,7 @@ require ('../rabbitMQLib.inc');
 $message = "";
 $savedDiet = [];
 
-$phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
+$phpClient = new rabbitMQClient("../apiBroker.ini", "dataServer");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
