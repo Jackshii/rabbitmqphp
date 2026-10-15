@@ -38,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $request['session_key'] = $_SESSION['sessionToken'];
     $request['dietInfo'] = $_POST['diet'] ?? [];
 
-    $phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
-    // $response = $phpClient -> send_request ($request);
+    // $phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
+    $response = $phpClient -> send_request ($request);
 
     if (is_array($response) && $response['status'] == 'success') {
         header("Location: restrictions.php?saved=1");
