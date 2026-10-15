@@ -17,19 +17,7 @@ require ('../rabbitMQLib.inc');
 $message = "";
 $savedDiet = [];
 
-$request = array();
-$request['type'] = 'getDiet';
-$request['session_key'] = $_SESSION['sessionToken'];
-
 $phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
-$response = $phpClient -> send_request ($request);
-$debugLoad = $response;   // DEBUG: remove later
-
-if (is_array($response) && $response['status'] == 'success') {
-    // $savedDiet = $response[ASK ERIC TO SEND BACK AS AN ARRAY]
-} else {
-    // LOOK INTO IF FAIL IS NEEDED HERE
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -38,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $request['session_key'] = $_SESSION['sessionToken'];
     $request['dietInfo'] = $_POST['diet'] ?? [];
 
-    // $phpClient = new rabbitMQClient("../apiBroker.ini", "restrictionServer");
     $response = $phpClient -> send_request ($request);
 
     if (is_array($response) && $response['status'] == 'success') {
@@ -46,6 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } else {
         $message = "Failed";
+        $savedDiet = $response['dietInfo'] ?? [];    }
+} else {
+    $request = array();
+    $request['type'] = 'getDiet';
+    $request['session_key'] = $_SESSION['sessionToken'];
+
+    $response = $phpClient -> send_request ($request);
+
+    if (is_array($response) && $response['status'] == 'success') {
+    $savedDiet = $response['dietInfo'] ?? [];
     }
 }
 ?>
@@ -56,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once('../head.php');
 ?>
 <!-- DEBUG: remove later -->
-<pre class="bg-light border m-3 p-2 small"><?php echo htmlspecialchars(var_export($debugLoad, true)); ?></pre>
+<pre class="bg-light border m-3 p-2 small"><?php echo htmlspecialchars(var_export($response ?? 'no response', true)); ?></pre>
 
     <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
