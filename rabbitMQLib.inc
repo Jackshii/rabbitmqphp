@@ -211,6 +211,11 @@ class rabbitMQClient
       $params['login'] = $this->USER;
       $params['password'] = $this->PASSWORD;
       $params['vhost'] = $this->VHOST;
+      //Add params for both read/connection time out
+      $params['read_timeout'] = 10;
+      $params['connect_timeout'] = 5;
+
+
 
 			$conn = new AMQPConnection($params);
 			$conn->connect();
@@ -233,14 +238,22 @@ class rabbitMQClient
 			$exchange->publish($json_message,$this->routing_key,AMQP_NOPARAM,array('reply_to'=>$callback_queue->getName(),'correlation_id'=>$uid));
       $this->response_queue[$uid] = "waiting";
 			$callback_queue->consume(array($this,'process_response'));
-
+			//add logic to catch connections that gets timed out
 			$response = $this->response_queue[$uid];
 			unset($this->response_queue[$uid]);
+			$conn->disconnect();
 			return $response;
 		}
 		catch(Exception $e)
 		{
-			die("failed to send message to exchange: ". $e->getMessage()."\n");
+			unset($this->response_queue[$uid]);
+			if (isset($conn) && $conn->isConnected())
+				{
+				$conn->disconnect();
+			}
+
+			return array("status" => "error", 
+				"message" => "no response from server: ".$e->getMessage());
 		}
 	}
 
