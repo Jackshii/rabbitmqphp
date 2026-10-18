@@ -23,6 +23,7 @@ if (!isset($_SESSION['sessionToken'])) {
                         <div class="card-body">
                             <h5 class="card-text text-center">Hello, <?php echo $_SESSION['username']; ?>!</h5>
                             <!-- maybe info ab how the site works -->
+
                         </div>
                     </div>
                 </div>

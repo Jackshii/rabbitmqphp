@@ -33,7 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     } else {
         $message = "Failed";
-        $savedDiet = $response['dietInfo'] ?? [];    }
+        $savedDiet = $_POST['diet'] ?? [];
+    }
 } else {
     $request = array();
     $request['type'] = 'getDiet';
@@ -43,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (is_array($response) && $response['status'] == 'success') {
     $savedDiet = $response['dietInfo'] ?? [];
+    } else {
+        $message = "LoadFailed";
     }
 }
 ?>
@@ -73,10 +76,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     elseif ($message === "Failed"){
                                 ?>        
                                     <div class="d-flex justify-content-center">
-                                        <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error, Try Again!</div>
+                                        <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Saving, Try Again!</div>
                                     </div>
                                 <?php
-                                    }
+                                    } elseif ($message === "LoadFailed"){
+                                ?>        
+                                    <div class="d-flex justify-content-center">
+                                        <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Loading, Try Refreshing The Page!</div>
+                                    </div>
+                                <?php
+                                    } else
                                 ?>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" name="diet[]" value="balanced" id="dietBalanced" <?php if (in_array('balanced', $savedDiet)) echo 'checked'; ?>>
