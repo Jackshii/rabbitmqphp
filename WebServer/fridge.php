@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $request = array();
     $request['type'] = 'setFridge';
     $request['session_key'] = $_SESSION['sessionToken'];
-    $request['fridgeInfo'] = $_POST['fridge'] ?? [];
+    $request['ingredientInfo'] = $_POST['fridge'] ?? [];
 
     $response = $phpClient -> send_request ($request);
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response = $phpClient -> send_request ($request);
 
     if (is_array($response) && $response['status'] == 'success') {
-    $savedFridge = $response['fridgeInfo'] ?? [];
+    $savedFridge = $response['ingredientInfo'] ?? [];
     }
 }
 ?>
