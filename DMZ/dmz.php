@@ -8,7 +8,7 @@ function recipeSearch($info)
     $api_id=$api_creds['api_ID'];
     $api_key=$api_creds['api_KEY'];
     $returnRecipesMatch= array();
-    $ingred=$info['ingredients'];
+    $ingred=implode(' ',$info['ingredients']);
     $diet= $info['diet'];
     $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
     if(!empty($diet))
