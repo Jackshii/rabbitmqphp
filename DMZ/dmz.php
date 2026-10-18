@@ -12,7 +12,11 @@ function recipeSearch($info)
     $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
     if(!empty($diet))
         {
-            $APICall= $APICall . "&diet=" . urlencode($diet);
+            foreach($diet as $dietType)
+            {
+                $APICall= $APICall . "&diet=" . urlencode($dietType);
+            }
+            
         }
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipesReturn,true);
