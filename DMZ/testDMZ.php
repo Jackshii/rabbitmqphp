@@ -7,7 +7,7 @@ $testClient=new rabbitMQClient("../apiBroker.ini","dmzServer");
 $info_array=array();
 $info_array['type']="recipeSearch";
 $info_array['ingredients']="garlic chicken";
-$info_array['diet']="balanced";
+$info_array['diet']="balanced,low-carb";
 echo "sending to rabbit queue";
 $return_array=$testClient->send_request($info_array);
 echo "response recieve";
