@@ -2,6 +2,7 @@
 <?php
 function recipeSearch($info)
 {
+    var_dump($info);
     $api_info = __DIR__ . '/api.ini';
     $api_creds= parse_ini_file($api_info);
     $api_id=$api_creds['api_ID'];
