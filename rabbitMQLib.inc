@@ -22,9 +22,11 @@ class rabbitMQServer
 		$this->machine = getHostInfo(array($machine));
 		$this->BROKER_HOST   = $this->machine[$server]["BROKER_HOST"];
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
-		$this->USER     = $this->machine[$server]["USER"];
-		$this->PASSWORD = $this->machine[$server]["PASSWORD"];
-		$this->VHOST = $this->machine[$server]["VHOST"];		
+		$this->VHOST = $this->machine[$server]["VHOST"];	
+		//added a line to parse the brokerCreds ini file rather than looking at the actual broker files
+		$brokerCreds = parse_ini_file(dirname($machine)."/.brokerCreds.ini", true);
+		$this->USER = $brokerCreds[$this->VHOST]["USER"];
+		$this->PASSWORD = $brokerCreds[$this->VHOST]["PASSWORD"];	
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
 		$this->queue = $this->machine[$server]["QUEUE"];
 		$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
@@ -163,9 +165,11 @@ class rabbitMQClient
 		$this->machine = getHostInfo(array($machine));
 		$this->BROKER_HOST   = $this->machine[$server]["BROKER_HOST"];
 		$this->BROKER_PORT   = $this->machine[$server]["BROKER_PORT"];
-		$this->USER     = $this->machine[$server]["USER"];
-		$this->PASSWORD = $this->machine[$server]["PASSWORD"];
-		$this->VHOST = $this->machine[$server]["VHOST"];		
+		$this->VHOST = $this->machine[$server]["VHOST"];	
+		//added a line to parse the brokerCreds ini file rather than looking at the actual broker files
+		$brokerCreds = parse_ini_file(dirname($machine)."/.brokerCreds.ini", true);
+		$this->USER = $brokerCreds[$this->VHOST]["USER"];
+		$this->PASSWORD = $brokerCreds[$this->VHOST]["PASSWORD"];	
 		$this->exchange = $this->machine[$server]["EXCHANGE"];
 		$this->queue = $this->machine[$server]["QUEUE"];
 		$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
