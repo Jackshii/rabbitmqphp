@@ -12,7 +12,8 @@ echo "sending to rabbit queue";
 $return_array=$testClient->send_request($info_array);
 echo "response recieve";
 print_r($return_array);
-
+if(!empty($return_array['recipeSearch']))
+{
 $first_match=$return_array['recipeSearch'][0]; //index the return array so you can pick the recipe based on index. (prob need to create a for loop for a certain amount of time or base on number of matches)
 $recipe_info=$first_match['recipe'];// just makes a vari so you it easier to index recipe info.
 $recipeArray=array();
@@ -26,5 +27,10 @@ echo $recipeArray['recipe_uri']. "\n";
 echo $recipeArray['recipe_image']. "\n";
 echo $recipeArray['recipe_dietLabels']. "\n";
 echo $recipeArray['recipe_healthLabels']. "\n";
+}
+else
+{
+echo "no recipes";
+}
 
 ?>
