@@ -14,11 +14,10 @@ echo "response recieve";
 print_r($return_array);
 if(!empty($return_array['recipeSearch']))
 {
-$first_match=$return_array['recipeSearch'][0]; //index the return array so you can pick the recipe based on index. (prob need to create a for loop for a certain amount of time or base on number of matches)
-$recipe_info=$first_match['recipe'];// just makes a vari so you it easier to index recipe info.
+$recipe_info=$return_array['recipeSearch'][0]; //index the return array so you can pick the recipe based on index. (prob need to create a for loop for a certain amount of time or base on number of matches)
 $recipeArray=array();
 $recipeArray['recipe_name']=$recipe_info['name'];// just gives you the title of recipe.
-$recipeArray['recipe_uri'] = $recipe_info['uri'];// give you the uri of instrction of recipe.
+$recipeArray['recipe_uri'] = $recipe_info['url'];// give you the uri of instrction of recipe.
 $recipeArray['recipe_image'] = $recipe_info['image'];//give website link to image.
 $recipeArray['recipe_dietLabels']=implode(",",$recipe_info['diet']);///break the array and make it into a comma list.
 $recipeArray['recipe_healthLabels']=implode(",",$recipe_info['allergy']); //same as the one above but just for allergies.
