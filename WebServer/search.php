@@ -69,36 +69,70 @@ if ($action === 'fridgeSearch') {
                         <?php if ($action === '') { ?>
                             <form action="search.php" method="POST" >
                                 <div class="text-center mt-4 mb-3">
-                                    <button type="submit" name="action" value="recipeSearch" class="btn btn-lg rounded-0 border-dark border-3 fs-5">Search By Recipe</button>
+                                    <button type="submit" name="action" value="searchByRecipe" class="btn btn-lg rounded-0 border-dark border-3 fs-5">Search By Recipe</button>
                                 </div>
                                 <div class="text-center mt-4 mb-3">    
-                                    <button type="submit" name="action" value="fridgeSearch" class="btn btn-lg rounded-0 border-dark border-3 fs-5">Search By Recipe</button>
+                                    <button type="submit" name="action" value="fridgeSearch" class="btn btn-lg rounded-0 border-dark border-3 fs-5">Search By Fridge</button>
                                 </div>                                
                             </form>
                         <?php } ?>
 
                         <!-- SEARCH BOX -->
-                        <?php if ($action === 'recipeSearch') { ?>
+                        <?php if ($action === 'searchByRecipe' || $action === 'recipeSearch') { ?>
                             <form action="search.php" method="POST" >
                                 <div class="mb-3">
                                     <label for="recipeQuery" class="form-label">Recipe</label>
                                     <input type="text" name="recipeQuery" maxlength="30" class="form-control" id="recipeQuery" placeholder="ex. Lasagna" required>
                                 </div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" class="contact-submit-button btn btn-primary border-dark">Search</button>
+                                    <button type="submit" name="action" value="recipeSearch" class="contact-submit-button btn btn-primary border-dark">Search</button>
                                 </div>
   
                             </form>
                         <?php } ?>
+
+                        <!-- XXXXXXXXXXXXXXXXXXXX -->
+                         <!-- DEBUG: remove later -->
+                        <?php if ($searched) { ?>
+                            <pre class="bg-light border mt-3 p-2 small"><?php echo htmlspecialchars(var_export($response ?? 'no response', true)); ?></pre>
+                        <?php } ?>
+
+                        <!-- RESULTS -->
+                        <?php if ($searched) { ?>
+                            <?php if ($message === "Failed") { ?>
+                                <div class="alert alert-danger text-center mt-3">Search failed, try again.</div>
+                            <?php } elseif (count($recipes) === 0) { ?>
+                                <div class="alert alert-warning text-center mt-3">No recipes found.</div>
+                            <?php } ?>
+
+                            <div class="list-group mt-3">
+                                <?php foreach ($recipes as $recipe) { ?>
+                                    <a href="recipe.php?id=<?php echo urlencode($recipe['id']); ?>"
+                                    class="list-group-item list-group-item-action d-flex align-items-center gap-3">
+                                        <img src="<?php echo htmlspecialchars($recipe['image']); ?>" width="64" height="64" class="rounded" alt="">
+                                        <div>
+                                            <div class="fw-bold"><?php echo htmlspecialchars($recipe['label']); ?></div>
+                                            <small class="text-muted"><?php echo (int)$recipe['calories']; ?> cal · <?php echo (int)$recipe['time']; ?> min</small>
+                                        </div>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+
+                        <!-- BACK TO THE TWO BUTTONS -->
+                        <?php if ($action !== '') { ?>
+                            <div class="text-center mt-3">
+                                <a href="search.php">← Start a new search</a>
+                            </div>
+                        <?php } ?>
+
+                        <!-- XXXXXXXXXXXXXXXxx -->
 
 
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-     <!-- have it so it shows two buttons, search by ingredients or fridge, and then it redirects them to those separate pages or should that be done on homepage???? -->
-        
+    </div>       
 
 <?php require_once('../footer.php'); ?>
