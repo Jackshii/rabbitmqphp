@@ -29,7 +29,21 @@ function recipeSearch($info)
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipesReturn,true);
     $recipesMatch=$recipesPHP['hits'];
-    $returnRecipesMatch['recipeSearch']=$recipesMatch;
+    
+    foreach(array_slice($recipeMatch,0,10) as $recipeMatch)
+    {
+        $recipeInfo=$recipeMatch['recipe'];
+
+        $condenseRecipes[]=array();
+        $condenseRecipes['name']=$recipeInfo['label'];
+        $condenseRecipes['image']=$recipeInfo['image'];
+        $condenseRecipes['url']=$recipeInfo['url'];
+        $condenseRecipes['ingredients']=$recipeInfo['ingredientLines'];
+        $condenseRecipes['diet']=$recipeInfo['dietLabels'];
+        $condenseRecipes['allergy']=$recipeInfo['healthLabels'];
+    }
+    $returnRecipesMatch['recipeSearch']=$condenseRecipes;
+    
     return $returnRecipesMatch;
 }
 require('../path.inc');
