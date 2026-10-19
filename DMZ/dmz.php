@@ -31,7 +31,7 @@ function recipeSearch($info)
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipesReturn,true);
     $recipesMatch=$recipesPHP['hits'];
-    if(is_array($recipeMatch))
+    if(is_array($recipesMatch))
     {
     foreach(array_slice($recipeMatch,0,10) as $match)
     {
