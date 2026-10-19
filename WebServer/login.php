@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <body class="d-flex flex-column min-vh-100">
 
     <!-- CARD BELOW -->
+     <!-- REMOVE -->
      <pre class="bg-light border m-3 p-2 small"><?php echo htmlspecialchars(var_export($response ?? 'no response', true)); ?></pre>
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
