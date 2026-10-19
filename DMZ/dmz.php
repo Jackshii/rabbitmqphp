@@ -21,7 +21,7 @@ function recipeSearch($info)
     $diet= $info['diet'];
     if(!empty($info['id']))
     {
-    $APICall="https://api.edamam.com/api/recipes/v2".urldecode($info['id'])."?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
+    $APICall="https://api.edamam.com/api/recipes/v2/".urldecode($info['id'])."?type=public&app_id=". $api_id . "&app_key=". $api_key;
     }
     else
     {
@@ -69,7 +69,7 @@ function recipeSearch($info)
     }
 
 
-    else
+    else if($info['type']=="detailSearch")
     {
         if(is_array($recipesMatch))
         {
