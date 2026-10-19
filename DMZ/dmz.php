@@ -60,8 +60,6 @@ function recipeSearch($info)
             'id' => basename($recipeInfo['uri']),
             'name' => $recipeInfo['label'],
             'image' => $recipeInfo['image'],
-            'diet'=>$recipeInfo['dietLabels'],
-            'allergy'=>$recipeInfo['healthLabels'],
             'totalTime' => $recipeInfo['totalTime'],
             'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
         );
