@@ -19,34 +19,56 @@ function recipeSearch($info)
     $ingred=$info['ingredients'];
     }
     $diet= $info['diet'];
+    
+
+
     if(!empty($info['id']))
     {
-    $APICall="https://api.edamam.com/api/recipes/v2/".urldecode($info['id'])."?type=public&app_id=". $api_id . "&app_key=". $api_key;
+        $APICall="https://api.edamam.com/api/recipes/v2/".urldecode($info['id'])."?type=public&app_id=". $api_id . "&app_key=". $api_key;
     }
+
     else
     {
-    $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
-    }
+        $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
+    
   
-    if(!empty($diet))
-        {
-            foreach($diet as $dietType)
+        if(!empty($diet))
             {
-                $APICall= $APICall . "&diet=" . urlencode($dietType);
-            }
+                foreach($diet as $dietType)
+                {
+                    $APICall= $APICall . "&diet=" . urlencode($dietType);
+                }
             
-        }
+            }
+    }
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipesReturn,true);
     if(isset($recipesPHP['_links']))
         {
-            unset($recipesPHP['_links']); //remove api key from going out hopefully
+            unset($recipesPHP['_links']); //remove api key from going out hopefully 
         }
     $recipesMatch=$recipesPHP['hits'];
     
+    //return 1 recipe if recipe id is present hopefully :3
+    if(!empty($info['id']))
+        {
+            $recipeInfo=$recipesPHP['recipe'];
+            $condenseRecipes= array
+            (
+            'id' => basename($recipeInfo['uri']),
+            'name' => $recipeInfo['label'],
+            'image' => $recipeInfo['image'],
+            'url' => $recipeInfo['url'],
+            'ingredients' =>$recipeInfo['ingredientLines'],
+            'totalTime' => $recipeInfo['totalTime'],
+            'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
+            );
+        }
+
 
 
     //sort via type
+
     if($info['type']=="recipeSearch")
     {
         if(is_array($recipesMatch))
