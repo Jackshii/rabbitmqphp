@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <label class="form-check-label" for="dietLowFat">Low Fat</label>
                                         </div>
                                     </div>
-                                    <div class="text-center mt-4">
+                                    <div class="text-center mt-4 d-flex justify-content-center">
                                         <button type="submit" class="contact-submit-button btn btn-primary border-dark">Save</button>
                                     </div>
                                 </div>
