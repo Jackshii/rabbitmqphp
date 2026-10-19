@@ -8,6 +8,7 @@ function recipeSearch($info)
     $api_id=$api_creds['api_ID'];
     $api_key=$api_creds['api_KEY'];
     $returnRecipesMatch= array();
+    $condenseRecipes=array();
     if (is_array($info['ingredients']))
     {
     $ingred=implode(' ',$info['ingredients']);
