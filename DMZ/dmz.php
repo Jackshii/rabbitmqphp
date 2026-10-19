@@ -34,13 +34,16 @@ function recipeSearch($info)
     {
         $recipeInfo=$recipeMatch['recipe'];
 
-        $condenseRecipes[]=array();
-        $condenseRecipes['name']=$recipeInfo['label'];
-        $condenseRecipes['image']=$recipeInfo['image'];
-        $condenseRecipes['url']=$recipeInfo['url'];
-        $condenseRecipes['ingredients']=$recipeInfo['ingredientLines'];
-        $condenseRecipes['diet']=$recipeInfo['dietLabels'];
-        $condenseRecipes['allergy']=$recipeInfo['healthLabels'];
+        $condenseRecipes[]=array
+        (
+            'name' => $recipeInfo['label'],
+            'image' => $recipeInfo['image'],
+            'url' => $recipeInfo['url'],
+            'ingredients' =>$recipeInfo['ingredientLines'],
+            'diet'=>$recipeInfo['dietLabels'],
+            'allergy'=>$recipeInfo['healthLabels'],
+        );
+        
     }
     $returnRecipesMatch['recipeSearch']=$condenseRecipes;
     
