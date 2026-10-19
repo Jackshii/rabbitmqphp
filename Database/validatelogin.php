@@ -4,6 +4,7 @@ require_once('../path.inc');
 require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
 require_once('../connection.php');
+
 function login($user, $pass) {
 	global $Host, $User, $Pass, $Name;
 	$db = new mysqli($Host, $User, $Pass, $Name);
@@ -13,7 +14,7 @@ function login($user, $pass) {
         $hash = $row['password'];
         if (password_verify($pass, $hash)) {
             $sessionkey = bin2hex(random_bytes(32));
-            $update = "update logininfo set session_key = '$sessionkey' where id = " . $row['id'];
+            $update = "update logininfo set sessionkey = '$sessionkey' where id = " . $row['id'];
             $db->query($update);
             return ["status" => "success" , "session_key" => $sessionkey , "username" => $user];
         }
@@ -21,13 +22,14 @@ function login($user, $pass) {
     return ["status"  => "error"] ;
 }
 function request($req) {
-    echo "login request:" . PHP_EOL;
+	echo "login request:" . PHP_EOL;
+	var_dump($req);
     $user = $req['user'] ;
     $pass = $req['password'];
     echo "doing login process for '$user'" . PHP_EOL;
     return login($user, $pass);
 }
-$server = new rabbitMQServer("authBroker.ini", "loginServer");
+$server = new rabbitMQServer("../authBroker.ini", "loginServer");
 echo "Login Listener Start" . PHP_EOL;
 $server->process_requests('request');
 ?> 
