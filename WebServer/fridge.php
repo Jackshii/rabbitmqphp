@@ -69,8 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error, Try Again!</div>
                                     </div>
                                 <?php } ?>
-                                <div class="row mt-3">
-                                    <div class="col-md-6 d-flex justify-content-center">
+                                    <div class="d-flex justify-content-center flex-wrap gap-5 mt-3">
                                         <div class="me-5">
                                             <div class="form-check my-2">
                                                 <input class="form-check-input" type="checkbox" name="fridge[]" value="butter" id="fridgeButter" <?php if (in_array('butter', $savedFridge)) echo 'checked'; ?>>
@@ -83,8 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             
                                             <!-- add all from left colm here -->
                                         </div>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-center">
                                         <div class="me-5">
                                             <div class="form-check my-2">
                                                 <input class="form-check-input" type="checkbox" name="fridge[]" value="chicken" id="fridgeChicken" <?php if (in_array('chicken', $savedFridge)) echo 'checked'; ?>>
@@ -97,7 +94,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <!-- add all from right colm here -->
                                         </div>
                                     </div>
-                                </div>
                                 <div class="text-center mt-4">
                                     <button type="submit" class="contact-submit-button btn btn-primary border-dark">Save</button>
                                 </div>

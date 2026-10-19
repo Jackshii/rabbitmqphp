@@ -85,35 +85,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Loading, Try Refreshing The Page!</div>
                                     </div>
                                 <?php
-                                    } else {
+                                    }
                                 ?>
                                 <div class="fs-4 my-2 d-flex justify-content-center">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="diet[]" value="balanced" id="dietBalanced" <?php if (in_array('balanced', $savedDiet)) echo 'checked'; ?>>
-                                        <label class="form-check-label" for="dietBalanced">Balanced</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="diet[]" value="high-fiber" id="dietHighFiber" <?php if (in_array('high-fiber', $savedDiet)) echo 'checked'; ?>>
-                                        <label class="form-check-label" for="dietHighFiber">High Fiber</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="diet[]" value="high-protein" id="dietHighProtein" <?php if (in_array('high-protein', $savedDiet)) echo 'checked'; ?>>
-                                        <label class="form-check-label" for="dietHighProtein">High Protein</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="diet[]" value="low-carb" id="dietLowCarb" <?php if (in_array('low-carb', $savedDiet)) echo 'checked'; ?>>
-                                        <label class="form-check-label" for="dietLowCarb">Low Carb</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" name="diet[]" value="low-fat" id="dietLowFat" <?php if (in_array('low-fat', $savedDiet)) echo 'checked'; ?>>
-                                        <label class="form-check-label" for="dietLowFat">Low Fat</label>
+                                    <div class="me-5">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="diet[]" value="balanced" id="dietBalanced" <?php if (in_array('balanced', $savedDiet)) echo 'checked'; ?>>
+                                            <label class="form-check-label" for="dietBalanced">Balanced</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="diet[]" value="high-fiber" id="dietHighFiber" <?php if (in_array('high-fiber', $savedDiet)) echo 'checked'; ?>>
+                                            <label class="form-check-label" for="dietHighFiber">High Fiber</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="diet[]" value="high-protein" id="dietHighProtein" <?php if (in_array('high-protein', $savedDiet)) echo 'checked'; ?>>
+                                            <label class="form-check-label" for="dietHighProtein">High Protein</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="diet[]" value="low-carb" id="dietLowCarb" <?php if (in_array('low-carb', $savedDiet)) echo 'checked'; ?>>
+                                            <label class="form-check-label" for="dietLowCarb">Low Carb</label>
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" name="diet[]" value="low-fat" id="dietLowFat" <?php if (in_array('low-fat', $savedDiet)) echo 'checked'; ?>>
+                                            <label class="form-check-label" for="dietLowFat">Low Fat</label>
+                                        </div>
                                     </div>
                                     <div class="text-center mt-4">
                                         <button type="submit" class="contact-submit-button btn btn-primary border-dark">Save</button>
                                     </div>
                                 </div>
                             </form>
-                            <?php } ?>
                         </div>
                     </div>
                 </div>
