@@ -33,9 +33,9 @@ function recipeSearch($info)
     $recipesMatch=$recipesPHP['hits'];
     if(is_array($recipeMatch))
     {
-    foreach(array_slice($recipeMatch,0,10) as $recipeMatch)
+    foreach(array_slice($recipeMatch,0,10) as $match)
     {
-        $recipeInfo=$recipeMatch['recipe'];
+        $recipeInfo=$match['recipe'];
 
         $condenseRecipes[]=array
         (
