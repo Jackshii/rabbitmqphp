@@ -33,7 +33,7 @@ function recipeSearch($info)
     $recipesMatch=$recipesPHP['hits'];
     if(is_array($recipesMatch))
     {
-    foreach(array_slice($recipeMatch,0,10) as $match)
+    foreach(array_slice($recipesMatch,0,10) as $match)
     {
         $recipeInfo=$match['recipe'];
 
