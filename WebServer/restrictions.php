@@ -69,21 +69,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <?php
                                     if (isset($_GET['saved'])){
                                 ?>
-                                    <div class="d-flex justify-content-center">
-                                        <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Dietary Restrictions Saved!</div>
-                                    </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Dietary Restrictions Saved!</div>
+                                </div>
                                 <?php    }
                                     elseif ($message === "Failed"){
                                 ?>        
-                                    <div class="d-flex justify-content-center">
-                                        <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Saving, Try Again!</div>
-                                    </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Saving, Try Again!</div>
+                                </div>
                                 <?php
                                     } elseif ($message === "LoadFailed"){
                                 ?>        
-                                    <div class="d-flex justify-content-center">
-                                        <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Loading, Try Refreshing The Page!</div>
-                                    </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Loading, Try Refreshing The Page!</div>
+                                </div>
                                 <?php
                                     }
                                 ?>
@@ -110,7 +110,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <label class="form-check-label" for="dietLowFat">Low Fat</label>
                                         </div>
                                     </div>
-                                    <div class="text-center mt-4 d-flex justify-content-center">
+                                </div>
+                                    <div class="text-center mt-4">
                                         <button type="submit" class="contact-submit-button btn btn-primary border-dark">Save</button>
                                     </div>
                                 </div>
