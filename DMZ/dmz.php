@@ -19,7 +19,15 @@ function recipeSearch($info)
     $ingred=$info['ingredients'];
     }
     $diet= $info['diet'];
+    if(!empty($info['id']))
+    {
+    $APICall="https://api.edamam.com/api/recipes/v2".urldecode($info['id'])."?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
+    }
+    else
+    {
     $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
+    }
+  
     if(!empty($diet))
         {
             foreach($diet as $dietType)
@@ -36,10 +44,39 @@ function recipeSearch($info)
         }
     $recipesMatch=$recipesPHP['hits'];
     
-    if(is_array($recipesMatch))
+
+
+    //sort via type
+    if($info['type']=="recipeSearch")
     {
-    foreach(array_slice($recipesMatch,0,10) as $match)
+        if(is_array($recipesMatch))
+        {
+        foreach(array_slice($recipesMatch,0,10) as $match)
+        {
+        $recipeInfo=$match['recipe'];
+            
+        $condenseRecipes[]=array
+        (
+            'id' => basename($recipeInfo['uri']),
+            'name' => $recipeInfo['label'],
+            'image' => $recipeInfo['image'],
+            'diet'=>$recipeInfo['dietLabels'],
+            'allergy'=>$recipeInfo['healthLabels'],
+            'totalTime' => $recipeInfo['totalTime'],
+            'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
+        );
+        
+        }
+        }
+    }
+
+
+    else
     {
+        if(is_array($recipesMatch))
+        {
+        foreach(array_slice($recipesMatch,0,10) as $match)
+        {
         $recipeInfo=$match['recipe'];
 
         $condenseRecipes[]=array
@@ -55,8 +92,12 @@ function recipeSearch($info)
             'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
         );
         
+        }
+        }
     }
-    }
+
+
+
     $returnRecipesMatch['recipeSearch']=$condenseRecipes;
     
     return $returnRecipesMatch;
