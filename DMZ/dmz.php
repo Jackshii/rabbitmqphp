@@ -30,7 +30,12 @@ function recipeSearch($info)
         }
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipesReturn,true);
+    if(isset($recipesPHP['_links']))
+        {
+            unset($recipesPHP['_links']); //remove api key from going out hopefully
+        }
     $recipesMatch=$recipesPHP['hits'];
+    
     if(is_array($recipesMatch))
     {
     foreach(array_slice($recipesMatch,0,10) as $match)
@@ -39,12 +44,15 @@ function recipeSearch($info)
 
         $condenseRecipes[]=array
         (
+            'id' => basename($recipeInfo['uri']),
             'name' => $recipeInfo['label'],
             'image' => $recipeInfo['image'],
             'url' => $recipeInfo['url'],
             'ingredients' =>$recipeInfo['ingredientLines'],
             'diet'=>$recipeInfo['dietLabels'],
             'allergy'=>$recipeInfo['healthLabels'],
+            'totalTime' => $recipeInfo['totalTime'],
+            'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
         );
         
     }
