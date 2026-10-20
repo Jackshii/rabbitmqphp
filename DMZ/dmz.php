@@ -55,7 +55,7 @@ function recipeSearch($info)
             $recipeInfo=$recipesPHP['recipe'];
             $condenseRecipes= array
             (
-            'id' => basename($recipeInfo['uri']),
+            'id' => str_replace('http://www.edamam.com/ontologies/edamam.owl#','',$recipeInfo['uri']),
             'name' => $recipeInfo['label'],
             'image' => $recipeInfo['image'],
             'url' => $recipeInfo['url'],
@@ -63,6 +63,7 @@ function recipeSearch($info)
             'totalTime' => $recipeInfo['totalTime'],
             'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
             );
+            return $condenseRecipes;
         }
 
 
@@ -79,7 +80,7 @@ function recipeSearch($info)
             
         $condenseRecipes[]=array
         (
-            'id' => basename($recipeInfo['uri']),
+            'id' => str_replace('http://www.edamam.com/ontologies/edamam.owl#','',$recipeInfo['uri']),
             'name' => $recipeInfo['label'],
             'image' => $recipeInfo['image'],
             'totalTime' => $recipeInfo['totalTime'],
@@ -101,7 +102,7 @@ function recipeSearch($info)
 
         $condenseRecipes[]=array
         (
-            'id' => basename($recipeInfo['uri']),
+            'id' => str_replace('http://www.edamam.com/ontologies/edamam.owl#','',$recipeInfo['uri']),
             'name' => $recipeInfo['label'],
             'image' => $recipeInfo['image'],
             'url' => $recipeInfo['url'],
