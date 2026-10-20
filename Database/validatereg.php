@@ -10,7 +10,7 @@ function register($user, $pass) {
 
     $check="select * from logininfo where username = '$user'";
     $checkdup=mysqli_query($db, $check);
-    if ($checkdup && $checkdup->num_rows > 0) {
+    if ($checkdup->num_rows > 0) {
         return ["status" => "duplicate"];
     }
     $hash = password_hash($pass, PASSWORD_DEFAULT);
