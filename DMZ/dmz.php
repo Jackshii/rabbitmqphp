@@ -12,7 +12,7 @@ function recipeSearch($info)
     $recipesMatch=array();
     if (is_array($info['ingredients']))
     {
-    $ingred=implode(' ',$info['ingredients']);
+    $ingred=implode(',',$info['ingredients']);
     }
     else
     {
