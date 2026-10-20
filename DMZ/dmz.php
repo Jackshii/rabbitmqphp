@@ -12,7 +12,7 @@ function recipeSearch($info)
     $recipesMatch=array();
     if (is_array($info['ingredients']))
     {
-    $recieve_ingred=info['ingredients'];
+    $recieve_ingred=$info['ingredients'];
     shuffle($recieve_ingred);
     $condenseIngreds=array_slice($recieve_ingred,0,5);
     $ingred=implode(',',$condenseIngreds);
