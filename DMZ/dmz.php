@@ -63,6 +63,7 @@ function recipeSearch($info)
             'totalTime' => $recipeInfo['totalTime'],
             'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
             );
+            return $condenseRecipes;
         }
 
 
