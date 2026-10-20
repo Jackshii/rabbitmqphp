@@ -95,7 +95,7 @@ function recipeSearch($info)
     }
 
 
-    else if($info['type']=="detailSearch")
+    else if($info['type']=="detailedSearch")
     {
         if(is_array($recipesMatch))
         {
