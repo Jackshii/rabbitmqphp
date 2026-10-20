@@ -1,20 +1,17 @@
-<?php 
-
-session_start();
-
-if (!isset($_SESSION['sessionToken'])) {
-    header("Location: login.php");
-    exit();
-}
-
+<?php
+    session_start();
+    if (!isset($_SESSION['sessionToken'])) {
+        header("Location: login.php");
+        exit();
+    }
 ?>
 
 <!-- HTML BELOW -->
 <?php 
-    $pageTitle = 'Dietary Restrictions';
+    $pageTitle = 'Home';
     require_once('../head.php');
 ?>
-
+        <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
                 <div class="col-8 col-lg-6">
@@ -23,7 +20,9 @@ if (!isset($_SESSION['sessionToken'])) {
                         <div class="card-body">
                             <h5 class="card-text text-center">Hello, <?php echo $_SESSION['username']; ?>!</h5>
                             <!-- maybe info ab how the site works -->
-
+                            <p>
+                                XXXXXXXXXXXXXXXXXXX
+                            </p>
                         </div>
                     </div>
                 </div>

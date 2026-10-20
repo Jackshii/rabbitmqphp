@@ -1,20 +1,17 @@
 <?php 
-
-session_start();
-
-if (!isset($_SESSION['sessionToken'])) {
-    header("Location: login.php");
-    exit();
-}
-
+    session_start();
+    if (!isset($_SESSION['sessionToken'])) {
+        header("Location: login.php");
+        exit();
+    }
 ?>
 
 <!-- HTML BELOW -->
 <?php 
-    $pageTitle = 'Saved Recipes';
+    $pageTitle = 'My Recipes';
     require_once('../head.php');
 ?>
-    <!-- CARD BELOW -->
+        <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
                 <div class="col-8 col-lg-6">

@@ -28,19 +28,19 @@
                                 </ul>
                             </li> -->
                             <li class="nav-item">
-                                <a class="nav-link text-dark text-nowrap" href="search.php">Search</a>
+                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'Search'){ ?>fw-bold<?php } ?>" href="search.php">Search</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark text-nowrap" href="recommend.php">Recommendations</a>
+                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'Recommendations'){ ?>fw-bold<?php } ?>" href="recommend.php">Recommendations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark text-nowrap" href="fridge.php">My Fridge</a>
+                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'My Fridge'){ ?>fw-bold<?php } ?>" href="fridge.php">My Fridge</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark text-nowrap" href="savedRecipes.php">My Recipes</a>
+                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'My Recipes'){ ?>fw-bold<?php } ?>" href="savedRecipes.php">My Recipes</a>
                             </li>
                              <li class="nav-item">
-                                <a class="nav-link text-dark text-nowrap" href="restrictions.php">Diet Restrictions</a>
+                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'Dietary Restrictions'){ ?>fw-bold<?php } ?>" href="restrictions.php">Dietary Restrictions</a>
                             </li>
                             <!-- LOGOUT BUTTON -->
                             <li class="nav-item dropdown">
