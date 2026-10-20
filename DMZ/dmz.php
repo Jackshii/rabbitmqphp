@@ -64,7 +64,7 @@ function recipeSearch($info)
             'url' => $recipeInfo['url'],
             'ingredients' =>$recipeInfo['ingredientLines'],
             'totalTime' => $recipeInfo['totalTime'],
-            'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
+            'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
             );
             return $condenseRecipes;
         }
