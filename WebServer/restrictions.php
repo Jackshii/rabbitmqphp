@@ -61,9 +61,9 @@
                                 <?php
                                     if (isset($_GET['saved'])) {
                                 ?>
-                                <div class="d-flex justify-content-center">
-                                    <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Dietary Restrictions Saved!</div>
-                                </div>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Dietary Restrictions Saved!</div>
+                                    </div>
                                 <?php
                                     }
                                     elseif ($message === "Failed") {

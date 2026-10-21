@@ -16,7 +16,7 @@
             <div class="row justify-content-center">
                 <div class="col-8 col-lg-6">
                     <div class="card rounded-0 shadow-sm">
-                        <h3 class="card-header text-center"><?php echo $_SESSION['username']; ?>'s Saved Recipes!</h3>
+                        <h3 class="card-header text-center"><?php echo htmlspecialchars($_SESSION['username']); ?>'s Saved Recipes!</h3>
                         <div class="card-body">
                             <h5 class="card-text text-center">LIST THEM OUT MAYBE TABLE</h5>
                         </div>

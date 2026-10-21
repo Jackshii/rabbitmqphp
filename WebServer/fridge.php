@@ -53,105 +53,114 @@
                         <h3 class="card-header text-center">Enter Ingredients In Your Fridge Below</h3>
                         <div class="card-body">
                             <form action="fridge.php" method="POST">
-                                <?php if (isset($_GET['saved'])) { ?>
+                                <?php
+                                    if (isset($_GET['saved'])) { 
+                                ?>
                                     <div class="d-flex justify-content-center">
                                         <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Fridge Ingredients Saved!</div>
                                     </div>
-                                <?php } elseif ($message === "Failed") { ?>
+                                <?php
+                                    } elseif ($message === "Failed") { 
+                                ?>
                                     <div class="d-flex justify-content-center">
                                         <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error, Try Again!</div>
                                     </div>
-                                <?php } ?>
-                                    <div class="d-flex justify-content-center flex-wrap gap-5 mt-3">
-                                        <div class="me-5">
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="butter" id="fridgeButter" <?php if (in_array('butter', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeButter">Butter</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="milk" id="fridgeMilk" <?php if (in_array('milk', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeMilk">Milk</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="cream" id="fridgeCream" <?php if (in_array('cream', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeCream">Cream</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="egg" id="fridgeEggs" <?php if (in_array('egg', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeEggs">Eggs</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="cheese" id="fridgeCheese" <?php if (in_array('cheese', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeCheese">Cheese</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="onion" id="fridgeOnion" <?php if (in_array('onion', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeOnion">Onion</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="garlic" id="fridgeGarlic" <?php if (in_array('garlic', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeGarlic">Garlic</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="lettuce" id="fridgeLettuce" <?php if (in_array('lettuce', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeLettuce">Lettuce</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="potato" id="fridgePotato" <?php if (in_array('potato', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgePotato">Potato</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="corn" id="fridgeCorn" <?php if (in_array('corn', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeCorn">Corn</label>
+                                <?php 
+                                    }
+                                ?>
+                                    <div class="row mt-3">
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="butter" id="fridgeButter" <?php if (in_array('butter', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeButter">Butter</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="milk" id="fridgeMilk" <?php if (in_array('milk', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeMilk">Milk</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="cream" id="fridgeCream" <?php if (in_array('cream', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeCream">Cream</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="egg" id="fridgeEggs" <?php if (in_array('egg', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeEggs">Eggs</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="cheese" id="fridgeCheese" <?php if (in_array('cheese', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeCheese">Cheese</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="onion" id="fridgeOnion" <?php if (in_array('onion', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeOnion">Onion</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="garlic" id="fridgeGarlic" <?php if (in_array('garlic', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeGarlic">Garlic</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="lettuce" id="fridgeLettuce" <?php if (in_array('lettuce', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeLettuce">Lettuce</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="potato" id="fridgePotato" <?php if (in_array('potato', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgePotato">Potato</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="corn" id="fridgeCorn" <?php if (in_array('corn', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeCorn">Corn</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="me-5">
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="chicken" id="fridgeChicken" <?php if (in_array('chicken', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeChicken">Chicken</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="beef" id="fridgeBeef" <?php if (in_array('beef', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeBeef">Beef</label>
-                                            </div>
-                                             <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="pork" id="fridgePork" <?php if (in_array('pork', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgePork">Pork</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="bacon" id="fridgeBacon" <?php if (in_array('bacon', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeBacon">Bacon</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="fish" id="fridgeFish" <?php if (in_array('fish', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeFish">Fish</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="olive oil" id="fridgeOliveOil" <?php if (in_array('olive oil', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeOliveOil">Olive Oil</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="soy sauce" id="fridgeSoySauce" <?php if (in_array('soy sauce', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeSoySauce">Soy Sauce</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="chili oil" id="fridgeChilliOil" <?php if (in_array('chili oil', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeChilliOil">Chilli Oil</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="rice" id="fridgeRice" <?php if (in_array('rice', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeRice">Rice</label>
-                                            </div>
-                                            <div class="form-check my-2">
-                                                <input class="form-check-input" type="checkbox" name="fridge[]" value="beans" id="fridgeBeans" <?php if (in_array('beans', $savedFridge)) echo 'checked'; ?>>
-                                                <label class="form-check-label" for="fridgeBeans">Beans</label>
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="chicken" id="fridgeChicken" <?php if (in_array('chicken', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeChicken">Chicken</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="beef" id="fridgeBeef" <?php if (in_array('beef', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeBeef">Beef</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="pork" id="fridgePork" <?php if (in_array('pork', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgePork">Pork</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="bacon" id="fridgeBacon" <?php if (in_array('bacon', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeBacon">Bacon</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="fish" id="fridgeFish" <?php if (in_array('fish', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeFish">Fish</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="olive oil" id="fridgeOliveOil" <?php if (in_array('olive oil', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeOliveOil">Olive Oil</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="soy sauce" id="fridgeSoySauce" <?php if (in_array('soy sauce', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeSoySauce">Soy Sauce</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="chili oil" id="fridgeChilliOil" <?php if (in_array('chili oil', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeChilliOil">Chilli Oil</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="rice" id="fridgeRice" <?php if (in_array('rice', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeRice">Rice</label>
+                                                </div>
+                                                <div class="form-check my-2">
+                                                    <input class="form-check-input" type="checkbox" name="fridge[]" value="beans" id="fridgeBeans" <?php if (in_array('beans', $savedFridge)) echo 'checked'; ?>>
+                                                    <label class="form-check-label" for="fridgeBeans">Beans</label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 <div class="text-center mt-4">
                                     <button type="submit" class="contact-submit-button btn btn-primary border-dark">Save</button>
                                 </div>
-                                <!-- FIX ABOVE LAYOUT -->
                             </form>
                         </div>
                     </div>

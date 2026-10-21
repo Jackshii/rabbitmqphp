@@ -55,9 +55,7 @@
                             ?>
                                 <div class="d-flex justify-content-center">
                                     <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Successful!
-                                        <div>
-                                            <a class="text-decoration-underline" href="login.php">Login here</a>
-                                        </div>
+                                        <a class="text-decoration-underline" href="login.php">Login here</a>
                                     </div>
                                 </div>
                             <?php    
