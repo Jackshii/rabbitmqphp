@@ -50,8 +50,6 @@ function recipeSearch($info)
         {
             unset($recipesPHP['_links']); //remove api key from going out hopefully 
         }
-    $recipesMatch=$recipesPHP['hits'];
-    
     //return 1 recipe if recipe id is present hopefully :3
     if(!empty($info['id']))
         {
@@ -69,7 +67,7 @@ function recipeSearch($info)
             return $condenseRecipes;
         }
 
-
+    $recipesMatch=$recipesPHP['hits'];
 
     //sort via type
 
