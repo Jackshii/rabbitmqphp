@@ -159,12 +159,22 @@ function allreq($request) {
     $user=$sql->query("select username from logininfo where sessionkey='$sessionKey'");
     $userArray = $user->fetch_assoc();//convert table to array so we can index and find user
     $username= $userArray['username'];
-    $recipe_id=$request['recipe_id'];
+    $recipe_id=$request['id'];
     
     if ($type == "addFavorite")
     {
+        $recipe_name=$request['name'];
+        $image=$request['image'];
+        $url=$request['url'];
+        $ingredients=json_encode($request['ingredients']);
+        $diet= json_encode($request['diet']);
+        $allergy=json_encode($request['healthLabels']);
+        $totalTime=$request['totalTime'];
+        $average_calories=$request['average_calories'];
+
         //populate the table if info is there
-        if($sql->query("insert into user_favorites (username,recipe_id) values ('$username','$recipe_id')"))
+        if($sql->query("insert into user_favorites (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, totalTime, average_calories) values 
+        ('$username','$recipe_id','$recipe_name','$image','$url','$ingredients','$diet','$allergy','$totalTime','$average_calories')"))
             {
                 return['status'=>'success','message'=>'added to favorites'];
             }
@@ -188,17 +198,22 @@ function allreq($request) {
     }
     if ($type=='returnFavorites')
     {
-        $recipe_id_query= $sql->query("select recipe_id from user_favorites where username='$username'");
+        $recipe_id_query= $sql->query("select recipe_id, recipe_name, image, url, ingredients, diet, allergy, totalTime,average_calories
+         from user_favorites where username='$username'");
         $favorites=array();
         while($recipe=$recipe_id_query->fetch_assoc())
             {
-                $send_recipe_id = $recipe['recipe_id'];
-                $send_array=array();
-                $send_array['recipe_id']=$send_recipe_id;
-                $send_array['type']="detailedSearch";
-                $fetchFavClient=new rabbitMQClient("../apiBroker.ini","dmzServer");
-                $favResponse=$fetchFavClient->send_request($send_array);
-                $favorites[]=$favResponse;
+                $oneRecipe=array();
+                $oneRecipe['id']=$recipe['recipe_id'];
+                $oneRecipe['name']=$recipe['recipe_name'];
+                $oneRecipe['image']=$recipe['image'];
+                $oneRecipe['url']=$recipe['url'];
+                $oneRecipe['ingredients']=json_decode($recipe['ingredients'],true);
+                $oneRecipe['diet']=json_decode($recipe['diet'],true);
+                $oneRecipe['allergy']=json_decode($recipe['allergy'],true);
+                $oneRecipe['totalTime']=$recipe['totalTime'];
+                $oneRecipe['average_calories']=$recipe['average_calories'];
+                $favorites[]=$oneRecipe;
             }
             $return_array=array();
             $return_array['status']="success";
