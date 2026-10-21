@@ -10,6 +10,8 @@ function recipeSearch($info)
     $returnRecipesMatch= array();
     $condenseRecipes=array();
     $recipesMatch=array();
+    if(isset($info['ingredients']))
+    {
     if (is_array($info['ingredients']))
     {
     $recieve_ingred=$info['ingredients'];
@@ -21,7 +23,11 @@ function recipeSearch($info)
     {
     $ingred=$info['ingredients'];
     }
-    $diet= $info['diet'];
+    }
+    if(isset($info['diet']))
+    {
+        $diet= $info['diet'];
+    }
     
 
 
