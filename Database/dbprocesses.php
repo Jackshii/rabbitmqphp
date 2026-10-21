@@ -153,6 +153,60 @@ function allreq($request) {
         return $recipeA;
         }
     }
+        //Favorite Personal Deliverable
+    else if($type=='addFavorite'||$type=='removeFavorite'||$type=="returnFavorites")
+    {
+    $user=$sql->query("select username from logininfo where sessionkey='$sessionKey'");
+    $userArray = $user->fetch_assoc();//convert table to array so we can index and find user
+    $username= $userArray['username'];
+    $recipe_id=$request['recipe_id'];
+    
+    if ($type == "addFavorite")
+    {
+        //populate the table if info is there
+        if($sql->query("insert into user_favorites (username,recipe_id) values ('$username','$recipe_id')"))
+            {
+                return['status'=>'success','message'=>'added to favorites'];
+            }
+        else
+            {
+                return['status'=>'error','message'=>'was not able to add to favorites'];
+            }
+    }
+
+
+    if ($type=='removeFavorite')
+    {  
+        if($sql->query("delete from user_favorites where username ='$username' and recipe_id= '$recipe_id'"))
+            {
+                return['status'=>'success','message'=>'removed from favorites'];
+            }
+        else
+            {
+                 return['status'=>'error','message'=>'was not able to add to favorites'];
+            }
+    }
+    if ($type=='returnFavorites')
+    {
+        $recipe_id_query= $sql->query("select recipe_id from user_favorites where username='$username'");
+        $favorites=array();
+        while($recipe=$recipe_id_query->fetch_assoc())
+            {
+                $send_recipe_id = $recipe['recipe_id'];
+                $send_array=array();
+                $send_array['recipe_id']=$send_recipe_id;
+                $send_array['type']="detailedSearch";
+                $fetchFavClient=new rabbitMQClient("../apiBroker.ini","dmzServer");
+                $favResponse=$fetchFavClient->send_request($send_array);
+                $favorites[]=$favResponse;
+            }
+            $return_array=array();
+            $return_array['status']="success";
+            $return_array['favorites']=$favorites;
+            return $return_array;
+
+    }
+    }
     else {
         $errorA = array();
         $errorA['status'] = "error";
