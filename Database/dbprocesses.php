@@ -169,12 +169,13 @@ function allreq($request) {
         $ingredients=json_encode($request['ingredients']);
         $diet= json_encode($request['diet']);
         $allergy=json_encode($request['healthLabels']);
+        $cuisineType=json_encode($request['cuisineType']);
         $totalTime=$request['totalTime'];
         $average_calories=$request['average_calories'];
 
         //populate the table if info is there
-        if($sql->query("insert into user_favorites (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, totalTime, average_calories) values 
-        ('$username','$recipe_id','$recipe_name','$image','$url','$ingredients','$diet','$allergy','$totalTime','$average_calories')"))
+        if($sql->query("insert into user_favorites (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories) values 
+        ('$username','$recipe_id','$recipe_name','$image','$url','$ingredients','$diet','$allergy','$cuisineType','$totalTime','$average_calories')"))
             {
                 return['status'=>'success','message'=>'added to favorites'];
             }
@@ -198,7 +199,7 @@ function allreq($request) {
     }
     if ($type=='returnFavorites')
     {
-        $recipe_id_query= $sql->query("select recipe_id, recipe_name, image, url, ingredients, diet, allergy, totalTime,average_calories
+        $recipe_id_query= $sql->query("select recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories
          from user_favorites where username='$username'");
         $favorites=array();
         while($recipe=$recipe_id_query->fetch_assoc())
@@ -211,6 +212,7 @@ function allreq($request) {
                 $oneRecipe['ingredients']=json_decode($recipe['ingredients'],true);
                 $oneRecipe['diet']=json_decode($recipe['diet'],true);
                 $oneRecipe['allergy']=json_decode($recipe['allergy'],true);
+                $oneRecipe['cuisineType']=json_decode($recipe['cuisineType'],true);
                 $oneRecipe['totalTime']=$recipe['totalTime'];
                 $oneRecipe['average_calories']=$recipe['average_calories'];
                 $favorites[]=$oneRecipe;
