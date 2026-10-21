@@ -63,6 +63,7 @@ function recipeSearch($info)
             'ingredients' =>$recipeInfo['ingredientLines'],
             'totalTime' => $recipeInfo['totalTime'],
             'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
+            'cuisineType'=>$recipeInfo['cuisineType'],
             );
             return $condenseRecipes;
         }
@@ -85,7 +86,7 @@ function recipeSearch($info)
             'name' => $recipeInfo['label'],
             'image' => $recipeInfo['image'],
             'totalTime' => $recipeInfo['totalTime'],
-            'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
+            'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
         );
         
         }
@@ -112,6 +113,7 @@ function recipeSearch($info)
             'allergy'=>$recipeInfo['healthLabels'],
             'totalTime' => $recipeInfo['totalTime'],
             'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
+            'cuisineType'=>$recipeInfo['cuisineType'],
         );
         
         }
