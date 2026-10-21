@@ -3,7 +3,7 @@
 require_once('../path.inc');
 require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
-
+require_once('../connection.php');
 function getuser($sql, $session) {
     $id = $sql->query("select id from logininfo where sessionkey = '$session'");
     
@@ -15,8 +15,8 @@ function getuser($sql, $session) {
 }
 
 function allreq($request) {
-    $sql = new mysqli("localhost", "dbuser", "dbpass", "users");
-    
+    global $Host, $User, $Pass, $Name;
+    $db = new mysqli($Host, $User, $Pass, $Name);    
     $type = $request['type'];
     $session = $request['session_key'];
 
