@@ -10,11 +10,11 @@ function register($user, $pass) {
 
     $check="select * from logininfo where username = '$user'";
     $checkdup=mysqli_query($db, $check);
-    if ($checkdup && $checkdup->num_rows > 0) {
+    if ($checkdup->num_rows > 0) {
         return ["status" => "duplicate"];
     }
     $hash = password_hash($pass, PASSWORD_DEFAULT);
-    $sql = "insert into logininfo (username, password) values ('$username', '$hash')" ;
+    $sql = "insert into logininfo (username, password) values ('$user', '$hash')" ;
     if ($db->query($sql)) {
         return ["status" => "success"];
     } else {
@@ -29,7 +29,7 @@ function request($req) {
     echo "doing registration process for '$user'" . PHP_EOL;
     return register($user, $pass);
 }
-$server = new rabbitMQServer("authBroker.ini", "registrationServer");
+$server = new rabbitMQServer("../authBroker.ini", "registrationServer");
 echo "Registration Listener start" . PHP_EOL;
 $server->process_requests('request');
 ?> 
