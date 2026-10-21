@@ -10,7 +10,7 @@ function login($user, $pass) {
 	$db = new mysqli($Host, $User, $Pass, $Name);
     $sql = "select id, password from logininfo where username = '$user'";
     $result = $db->query($sql);
-    if ($result && $row = $result->fetch_assoc()) {
+    if ($row = $result->fetch_assoc()) {
         $hash = $row['password'];
         if (password_verify($pass, $hash)) {
             $sessionkey = bin2hex(random_bytes(32));
