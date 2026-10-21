@@ -4,7 +4,7 @@ require_once('../path.inc');
 require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
 require_once('../connection.php');
-function getuser($sql, $session) {
+function getU($sql, $session) {
     $id = $sql->query("select id from logininfo where sessionkey = '$session'");
     
     if ($userid = $id->fetch_assoc()) {
@@ -20,7 +20,7 @@ function allreq($request) {
     $type = $request['type'];
     $session = $request['session_key'];
 
-    $userId = getUser($sql, $session);
+    $userId = getU($sql, $session);
 
     if ($type == 'getDiet') {
         $result = $sql->query("select diet from userdiet where userid = '$userId'");
