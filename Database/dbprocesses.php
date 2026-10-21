@@ -16,7 +16,7 @@ function getuser($sql, $session) {
 
 function allreq($request) {
     global $Host, $User, $Pass, $Name;
-    $db = new mysqli($Host, $User, $Pass, $Name);    
+    $sql = new mysqli($Host, $User, $Pass, $Name);    
     $type = $request['type'];
     $session = $request['session_key'];
 
