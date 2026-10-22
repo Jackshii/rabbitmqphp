@@ -28,6 +28,11 @@ function recipeSearch($info)
     {
         $diet= $info['diet'];
     }
+    if(isset($info['cuisineType'])&& $info['type']=="recommended")
+    {
+        $cuisineArray=$info['cuisineType'];
+        $randomfavCuisine=$cuisineArray[array_rand($cuisineArray)];//pick a a random cusine type from cuisine array
+    }
     
 
 
@@ -38,9 +43,15 @@ function recipeSearch($info)
 
     else
     {
-        $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
     
-  
+        if(!empty($info['ingredients']))
+        {
+            $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
+        }
+        else
+        {
+            $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=". $api_id . "&app_key=". $api_key;
+        }
         if(!empty($diet))
             {
                 foreach($diet as $dietType)
@@ -49,9 +60,15 @@ function recipeSearch($info)
                 }
             
             }
+        if(!empty($randomfavCuisine))
+        {
+            $APICall=$APICall . "&cuisineType=" . urlencode($randomfavCuisine);
+        }
     }
+
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipesReturn,true);
+
     if(isset($recipesPHP['_links']))
         {
             unset($recipesPHP['_links']); //remove api key from going out hopefully 
@@ -125,12 +142,39 @@ function recipeSearch($info)
         }
         }
     }
+    
+    else if ($info['type']="recommended")
+    {
+        if(is_array($recipesMatch))
+        {
+        foreach(array_slice($recipesMatch,0,10) as $match)
+        {
+        $recipeInfo=$match['recipe'];
+
+        $condenseRecipes[]=array
+        (
+            'id' => str_replace('http://www.edamam.com/ontologies/edamam.owl#','',$recipeInfo['uri']),
+            'name' => $recipeInfo['label'],
+            'image' => $recipeInfo['image'],
+            'url' => $recipeInfo['url'],
+            'ingredients' =>$recipeInfo['ingredientLines'],
+            'diet'=>$recipeInfo['dietLabels'],
+            'allergy'=>$recipeInfo['healthLabels'],
+            'totalTime' => $recipeInfo['totalTime'],
+            'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
+            'cuisineType'=>$recipeInfo['cuisineType'],
+        );
+        
+        }
+        }
+    }
 
 
 
-    $returnRecipesMatch['recipeSearch']=$condenseRecipes;
+    $returnRecipesMatch['recipeSearch']=$condenseRecipes; //didn't need this because it nest the returnarray, but it works lol. we are too far deep.
     
     return $returnRecipesMatch;
+
 }
 require('../path.inc');
 require('../get_host_info.inc');
