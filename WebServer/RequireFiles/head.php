@@ -16,17 +16,6 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-end" id="mainNav">
                         <ul class="navbar-nav ms-auto gap-2 text-center">
-                            <!-- SUBMENU if needed later
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark fs-5" href="XXXXXX" data-bs-toggle="dropdown">XXXXX</a>
-                                <ul class="dropdown-menu play-dropdown text-center">
-                                    <li><a class="dropdown-item text-dark" href="XXXXXXXXX">TEMP</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-dark small" href="XXXX">TEMP</a></li>
-                                    <li><a class="dropdown-item text-dark small" href="XXXXXXXX">TEMP</a></li>
-                                    <li><a class="dropdown-item text-dark small" href="XXXXXXX">TEMP</a></li>
-                                </ul>
-                            </li> -->
                             <li class="nav-item">
                                 <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'Search'){ ?>fw-bold<?php } ?>" href="search.php">Search</a>
                             </li>
@@ -34,14 +23,15 @@
                                 <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'Recommendations'){ ?>fw-bold<?php } ?>" href="recommend.php">Recommendations</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'My Fridge'){ ?>fw-bold<?php } ?>" href="fridge.php">My Fridge</a>
+                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'My Recipes'){ ?>fw-bold<?php } ?>" href="favorites.php">My Recipes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'My Recipes'){ ?>fw-bold<?php } ?>" href="savedRecipes.php">My Recipes</a>
+                                <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'My Fridge'){ ?>fw-bold<?php } ?>" href="fridge.php">My Fridge</a>
                             </li>
                              <li class="nav-item">
                                 <a class="nav-link text-dark text-nowrap <?php if ($pageTitle === 'Dietary Restrictions'){ ?>fw-bold<?php } ?>" href="restrictions.php">Dietary Restrictions</a>
                             </li>
+
                             <!-- LOGOUT BUTTON -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-dark text-nowrap text-decoration-underline" data-bs-toggle="dropdown"><?php echo htmlspecialchars($_SESSION['username']) ?></a>

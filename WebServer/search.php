@@ -122,22 +122,25 @@
 
                         <!-- LIST OF RECIPES -->
                         <?php
-                        foreach ($recipes as $recipe) {
-                            $id = $recipe['id'];
-                            if ($recipe['totalTime'] > 0 ) {
-                                (int)$recipe['totalTime'];
-                                $time = $recipe['totalTime'];
-                            } else {
-                                $time = 'Time N/A';
-                            }
-                            $cals = round($recipe['average_calories']);
+                            foreach ($recipes as $recipe) {
+                                $id = $recipe['id'] ?? '';
+                                $name = $recipe['name'] ?? 'Recipe Name Not Available';
+                                $image = $recipe['image'] ?? '';
+                                $time = $recipe['totalTime'] ?? 0;
+                                $cals = round($recipe['average_calories'] ?? 0);
+
+                                if ($time > 0 ) {
+                                    $time = $time . " Minutes";
+                                } else {
+                                    $time = 'Time N/A';
+                                }
                         ?>
                             <div class="my-3">    
-                                <a class="list-group-item list-group-item-action d-flex align-items-center gap-3" href="recipe.php?id=<?php echo urlencode($id); ?>">
-                                    <img src="<?php echo htmlspecialchars($recipe['image']); ?>" width="64" height="64" class="object-fit-cover" alt="Recipe Thumbnail">
+                                <a class="list-group-item list-group-item-action d-flex align-items-center gap-3" target="_blank" href="recipe.php?id=<?php echo urlencode($id); ?>">
+                                    <img src="<?php echo htmlspecialchars($image); ?>" width="64" height="64" class="object-fit-cover flex-shrink-0 rounded" alt="Recipe Image">
                                     <div>
-                                        <h4 class="fw-bold"><?php echo htmlspecialchars($recipe['name']); ?></h4>
-                                        <p class="text-muted"><?php echo htmlspecialchars($cals); ?> Calories - <?php echo htmlspecialchars($time); ?> Minutes</p>
+                                        <h6 class="fw-bold mb-1"><?php echo htmlspecialchars($name); ?></h6>
+                                        <p class="text-muted mb-0"><?php echo htmlspecialchars($cals); ?> Calories  -  <?php echo htmlspecialchars($time); ?></p>
                                     </div>
                                 </a>
                             </div>
