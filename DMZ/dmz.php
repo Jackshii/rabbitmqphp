@@ -143,7 +143,7 @@ function recipeSearch($info)
         }
     }
     
-    else if ($info['type']="recommended")
+    else if ($info['type']="recommendations")
     {
         if(is_array($recipesMatch))
         {
