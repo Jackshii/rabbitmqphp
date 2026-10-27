@@ -28,7 +28,7 @@ function recipeSearch($info)
     {
         $diet= $info['diet'];
     }
-    if(isset($info['cuisineType'])&& $info['type']=="recommended")
+    if(isset($info['cuisineType'])&& $info['type']=="recommendations")
     {
         $cuisineArray=$info['cuisineType'];
         $randomfavCuisine=$cuisineArray[array_rand($cuisineArray)];//pick a a random cusine type from cuisine array
@@ -87,6 +87,8 @@ function recipeSearch($info)
             'diet'=>$recipeInfo['dietLabels'],
             'allergy'=>$recipeInfo['healthLabels'],
             'totalTime' => $recipeInfo['totalTime'],
+            'yield' => $recipeInfo['yield'],
+            'calories' => $recipeInfo['calories'],
             'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
             'cuisineType'=>$recipeInfo['cuisineType'],
             );
