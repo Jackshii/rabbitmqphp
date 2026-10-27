@@ -32,7 +32,7 @@
                                 </li>
                                 <li class="list-group-item mb-1">Save recipes for later</li>
                                 <li class="list-group-item mb-1">Leave reviews on recipes</li>
-                                <li class="list-group-item mb-1">Check out recommended recipes for you</li>
+                                <li class="list-group-item mb-0">Check out recommended recipes for you</li>
                             </ol>
                         </div>
                     </div>

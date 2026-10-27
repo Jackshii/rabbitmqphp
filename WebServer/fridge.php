@@ -18,7 +18,9 @@
         $request['type'] = 'setFridge';
         $request['session_key'] = $_SESSION['sessionToken'];
         $request['fridgeInfo'] = $_POST['fridge'] ?? [];
+
         $response = $phpClient -> send_request ($request);
+
         if (is_array($response) && $response['status'] == 'success') {
             header("Location: fridge.php?saved=1");
             exit();
@@ -30,7 +32,9 @@
         $request = array();
         $request['type'] = 'getFridge';
         $request['session_key'] = $_SESSION['sessionToken'];
+
         $response = $phpClient -> send_request ($request);
+        
         if (is_array($response) && $response['status'] == 'success') {
         $savedFridge = $response['fridgeInfo'] ?? [];
         }

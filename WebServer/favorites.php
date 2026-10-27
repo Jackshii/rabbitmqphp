@@ -21,7 +21,7 @@
     $response = $phpClient -> send_request ($request);
 
     if (is_array($response) && $response['status'] == 'success') {
-        $recipes = $response['recipes'] ?? [];
+        $recipes = $response['favorites'] ?? [];
     } else {
         $failed = true;
     }
@@ -80,7 +80,7 @@
                                 } else {
                             ?>
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Failed To Load Favorites, Try Again!</div>
+                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 w-auto d-inline-block">Failed To Load Favorites, Try Again!</div>
                                 </div>
                             <?php
                                 }
