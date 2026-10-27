@@ -61,7 +61,7 @@
                                 if ($message === "Failed") {
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Login Failed!</div>
+                                    <div class="alert alert-danger mt-3 text-center py-2 px-3 d-inline-block">Login Failed!</div>
                                 </div>
                             <?php        
                                 }
@@ -76,7 +76,7 @@
                                     <input type="password" name="password" maxlength="255" class="form-control" id="password" placeholder="Your password" required>
                                 </div>  
                                 <div class="text-center mt-4">
-                                    <button type="submit" class="contact-submit-button btn btn-primary border-dark">Login</button>
+                                    <button type="submit" class="btn btn-primary border-dark">Login</button>
                                 </div>
                                 <p class="ms-2 mt-4 mb-0">Don't have an account? Create one below:</p>
                                 <a href="register.php" class="ms-2 mt-0 fs-6">Create account</a>

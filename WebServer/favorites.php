@@ -48,9 +48,12 @@
                                 if (!$failed) {
                                     if (count($recipes) === 0) { 
                             ?>
-                                    <div class="alert alert-warning text-center mt-3">No Saved Recipes Found!
-                                        <p class="mt-1" style="font-size: 0.75em" >Click The Star Button On Your Favorite Recipe To Add It</p>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="alert alert-warning mt-3 text-center py-2 px-3 d-inline-block">No Saved Recipes Found!
+                                            <p class="my-1" style="font-size: 0.75em" >Click The Star Button On Your Favorite Recipe To Add It</p>
+                                        </div>
                                     </div>
+                                    
                             <?php 
                                     } else {
                                         foreach ($recipes as $recipe) {
@@ -80,7 +83,7 @@
                                 } else {
                             ?>
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 w-auto d-inline-block">Failed To Load Favorites, Try Again!</div>
+                                    <div class="alert alert-danger mt-3 text-center py-2 px-3 d-inline-block">Failed To Load Favorites, Try Again!</div>
                                 </div>
                             <?php
                                 }

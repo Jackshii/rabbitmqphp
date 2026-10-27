@@ -62,21 +62,21 @@
                                     if (isset($_GET['saved'])) {
                                 ?>
                                     <div class="d-flex justify-content-center">
-                                        <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Dietary Restrictions Saved!</div>
+                                        <div class="alert alert-success mt-3 text-center py-2 px-3 d-inline-block">Dietary Restrictions Saved!</div>
                                     </div>
                                 <?php
                                     }
                                     elseif ($message === "Failed") {
                                 ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Saving, Try Again!</div>
+                                    <div class="alert alert-danger mt-3 text-center py-2 px-3 d-inline-block">Error Saving, Try Again!</div>
                                 </div>
                                 <?php
                                     }
                                     elseif ($message === "LoadFailed") {
                                 ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Error Loading, Try Refreshing The Page!</div>
+                                    <div class="alert alert-danger mt-3 text-center py-2 px-3 d-inline-block">Error Loading, Try Refreshing The Page!</div>
                                 </div>
                                 <?php
                                     }
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                                     <div class="text-center mt-4">
-                                        <button type="submit" class="contact-submit-button btn btn-primary border-dark">Save</button>
+                                        <button type="submit" class="btn btn-primary border-dark">Save</button>
                                     </div>
                                 </div>
                             </form>

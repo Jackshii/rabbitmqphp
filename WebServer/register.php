@@ -54,7 +54,7 @@
                                 if ($message === "Success") {
                             ?>
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-success mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Successful!
+                                    <div class="alert alert-success mt-3 text-center py-2 px-3 d-inline-block">Registration Successful!
                                         <a class="text-decoration-underline" href="login.php">Login here</a>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                 elseif ($message === "Duplicate") {
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">
+                                    <div class="alert alert-warning mt-3 text-center py-2 px-3 d-inline-block">
                                         User Already Exists!
                                         <a class="text-decoration-underline" href="index.php">Back to Home!</a>
                                     </div>
@@ -73,7 +73,7 @@
                                 elseif ($message === "Failed") {
                             ?>        
                                 <div class="d-flex justify-content-center">
-                                    <div class="alert alert-danger mb-0 mt-3 text-center py-2 px-3 d-inline-block">Registration Failed!</div>
+                                    <div class="alert alert-danger mt-3 text-center py-2 px-3 d-inline-block">Registration Failed!</div>
                                 </div>
                             <?php
                                 }
@@ -88,7 +88,7 @@
                                     <input type="password" maxlength="255" class="form-control" name="password" id="password" placeholder="Your password" required>
                                 </div>
                                 <div class="text-center mt-4">
-                                    <button type="submit" class="contact-submit-button btn btn-primary border-dark">Create Account</button>
+                                    <button type="submit" class="btn btn-primary border-dark">Create Account</button>
                                 </div>
                             </form>
                         </div>

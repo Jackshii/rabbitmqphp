@@ -47,12 +47,16 @@
                             <?php
                                 if ($message === "Failed") {
                             ?>
-                                <div class="alert alert-danger text-center mt-3">Could Not Load Recommendations, Try Again!</div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-danger mt-3 text-center py-2 px-3 d-inline-block">Could Not Load Recommendations, Try Again!</div>
+                                </div>
                             <?php
                                 } elseif (count($savedRecommendations) === 0) {
                             ?>
-                                <div class="alert alert-warning text-center mt-3">No Recommendations Found
-                                    <p class="mt-1" style="font-size: 0.75em">Try Favoriting Some Recipes</p>
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-warning mt-3 text-center py-2 px-3 d-inline-block">No Recommendations Found!
+                                        <p class="my-1" style="font-size: 0.75em" >Try Favoriting Some Recipes</p>
+                                    </div>
                                 </div>
                             <?php
                                 }
