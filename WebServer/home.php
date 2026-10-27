@@ -20,14 +20,14 @@
                         <div class="card-body">
                             <h5 class="card-text text-center mb-3">Hello, <span class="text-decoration-underline"><?php echo htmlspecialchars($_SESSION['username']); ?>!</span></h5>
                             <h4 class="text-decoration-underlined mb-0 mt-2">How To Use Our Site</h4>
-                            <hr class="border-2 mx-auto mt-1" style="width: 98%;">
+                            <hr class="border-2 mx-auto mt-1" style="width: 100%;">
                             <ol class="list-unstyled list-group-numbered">
                                 <li class="list-group-item mb-1">Set your dietary restrictions / goals</li>
                                 <li class="list-group-item mb-1">Select the ingredients in your fridge</li>
                                 <li class="list-group-item mb-1">Search for recipes
                                     <ul class="list-unstyled list-group mb-1">
-                                        <li class="mb-1">- Search by recipe name</li>
-                                        <li class="mb-1">- Search by items in your fridge</li>
+                                        <li class="mb-1">  - Search by recipe name</li>
+                                        <li class="mb-1">  - Search by items in your fridge</li>
                                     </ul>
                                 </li>
                                 <li class="list-group-item mb-1">Save recipes for later</li>
