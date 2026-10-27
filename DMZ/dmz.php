@@ -84,6 +84,8 @@ function recipeSearch($info)
             'image' => $recipeInfo['image'],
             'url' => $recipeInfo['url'],
             'ingredients' =>$recipeInfo['ingredientLines'],
+            'diet'=>$recipeInfo['dietLabels'],
+            'allergy'=>$recipeInfo['healthLabels'],
             'totalTime' => $recipeInfo['totalTime'],
             'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
             'cuisineType'=>$recipeInfo['cuisineType'],
