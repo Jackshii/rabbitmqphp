@@ -236,12 +236,16 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                                 <!-- EXTERNAL LINK -->
                                 <?php
                                     if ($url !== '') { 
-                                ?>
-                                    <a href="<?php echo htmlspecialchars($url); ?>" target="_blank" class="btn btn-success mt-3 rounded-0">View Original Recipe Here</a>
+                                ?>  
+                                    <div class="text-center">
+                                        <a href="<?php echo htmlspecialchars($url); ?>" target="_blank" class="btn btn-success mt-3 rounded-0">View Original Recipe Here</a>
+                                    </div>
                                 <?php 
                                     } else {
                                 ?>
-                                    <p class="text-muted">No Link Available</p>
+                                    <div class="text-center">
+                                        <p class="text-muted mt-3">No Link Available</p>
+                                    </div>
                                 <?php
                                     }
                                 ?>

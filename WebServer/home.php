@@ -16,10 +16,10 @@
             <div class="row justify-content-center">
                 <div class="col-8 col-lg-6">
                     <div class="card rounded-0 shadow-sm">
-                        <h3 class="card-header text-center">Welcome To PROJECT NAME</h3>
+                        <h3 class="card-header text-center">Welcome To Project DORA</h3>
                         <div class="card-body">
                             <h5 class="card-text text-center mb-3">Hello, <span class="text-decoration-underline"><?php echo htmlspecialchars($_SESSION['username']); ?>!</span></h5>
-                            <h4 class="text-decoration-underlined mb-0 mt-2">How To Use Our Site</h4>
+                            <h4 class="mb-0 mt-2">How To Use Our Site</h4>
                             <hr class="border-2 mx-auto mt-0" style="width: 100%;">
                             <ol class="list-unstyled list-group-numbered">
                                 <li class="list-group-item mb-1">Set your dietary restrictions / goals</li>

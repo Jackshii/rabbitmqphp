@@ -36,7 +36,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-dark text-nowrap text-decoration-underline" data-bs-toggle="dropdown"><?php echo htmlspecialchars($_SESSION['username']) ?></a>
                                 <ul class="dropdown-menu play-dropdown text-center start-50 translate-middle-x">
-                                    <li><a class="dropdown-item text-dark px-1" href="logout.php" style=".play-dropdown {min-width: 0; width: max-content;}">Logout</a></li>
+                                    <li><a class="dropdown-item text-dark px-1" href="logout.php">Logout</a></li>
                                 </ul>
                             </li>
                         </ul>

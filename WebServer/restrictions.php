@@ -105,9 +105,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <div class="text-center mt-4">
-                                        <button type="submit" class="btn btn-primary border-dark">Save</button>
-                                    </div>
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-primary border-dark">Save</button>
                                 </div>
                             </form>
                         </div>
