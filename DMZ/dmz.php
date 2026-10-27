@@ -16,7 +16,7 @@ function recipeSearch($info)
     {
     $recieve_ingred=$info['ingredients'];
     shuffle($recieve_ingred);
-    $condenseIngreds=array_slice($recieve_ingred,0,5);
+    $condenseIngreds=array_slice($recieve_ingred,0,3);
     $ingred=implode(',',$condenseIngreds);
     }
     else
