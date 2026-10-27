@@ -22,6 +22,7 @@
     $recipe = [];
     $reviews = [];
     $loadFailed = false;
+    $isFavorite = false;
     $error = $_GET['error'] ?? '';
 
     $phpClient = new rabbitMQClient("../apiBroker.ini", "dataServer");
@@ -99,6 +100,7 @@
     if (is_array($response) && $response['status'] == 'success') {
         $recipe = $response['recipes'] ?? [];
         $reviews = $response['reviews'] ?? [];
+        $isFavorite = !empty($response['isfavorites']);
     } else {
         $loadFailed = true;
     }
@@ -110,16 +112,9 @@
     $cuisines = $recipe['cuisineType'] ?? [];
     $diets = $recipe['diet'] ?? [];
     $allergies = $recipe['allergy'] ?? [];
-    $cals = round($recipe['average_calories'] ?? 0);
+    $totalCals = round($recipe['calories'] ?? 0);
+    $avgCals = round($recipe['average_calories'] ?? 0);
     $servings = (int)($recipe['yield'] ?? 0);
-
-    //eric needs to add below
-    // XXXXXXXXXXXXXx
-    $isFavorite = !empty($recipe['isFavorite']);
-
-
-
-
 
     $time = (int)($recipe['totalTime'] ?? 0);
     if ($time > 0 ) {
@@ -233,7 +228,20 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                                 <?php 
                                     } else {
                                 ?>
-                                    <div class="bg-light border rounded-0 d-flex align-items-center justify-content-center text-muted">No Image Available</div>
+                                    <div class="bg-light border rounded-0 d-flex align-items-center justify-content-center text-muted" style="height: 250px;">No Image Available</div>
+                                <?php
+                                    }
+                                ?>
+
+                                <!-- EXTERNAL LINK -->
+                                <?php
+                                    if ($url !== '') { 
+                                ?>
+                                    <a href="<?php echo htmlspecialchars($url); ?>" target="_blank" class="btn btn-success mt-3 rounded-0">View Original Recipe Here</a>
+                                <?php 
+                                    } else {
+                                ?>
+                                    <p class="text-muted">No Link Available</p>
                                 <?php
                                     }
                                 ?>
@@ -242,19 +250,13 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                             <!-- DETAILS -->
                             <div class="col-md-7">
                                 <p class="mb-1"><strong>Time:</strong> <?php echo htmlspecialchars($time); ?></p>
-
-                                <!-- FIXXXXX -->
+                                <p class="mb-1"><strong>Total Calories:</strong> <?php echo htmlspecialchars($totalCals); ?> Cals</p>
                                 <?php
                                     if ($servings > 0) {
-                                        $cals = round(($cals / $servings)) . " Per Serving";
-                                    }
                                 ?>
-                                    <p class="mb-1"><strong>Calories:</strong> <?php echo $cals; ?> cals</p>
-                                <?php
-                                    if ($servings > 0) { 
-                                ?>
+                                    <p class="mb-1"><strong>Average Calories:</strong> <?php echo $avgCals; ?> Cals Per Serving</p>
                                     <p class="mb-1"><strong>Servings:</strong> <?php echo $servings; ?></p>
-                                <?php 
+                                <?php
                                     }
                                 ?>
 
@@ -280,23 +282,12 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                                 <?php
                                     if (count($allergies) > 0) {
                                 ?>
-                                    <p class="mb-1"><strong>Possible Allergens:</strong> <?php echo htmlspecialchars((implode(', ', $allergies))) ?></p>
+                                    <p class="mb-1"><strong>Allergy Info:</strong> <?php echo htmlspecialchars((implode(', ', $allergies))) ?></p>
                                 <?php              
                                     }
                                 ?>
 
-                                <!-- EXTERNAL LINK -->
-                                <?php
-                                    if ($url !== '') { 
-                                ?>
-                                    <a href="<?php echo htmlspecialchars($url); ?>" target="_blank" class="btn btn-success mt-3 rounded-0">View Original Recipe Here</a>
-                                <?php 
-                                    } else {
-                                ?>
-                                    <p class="text-muted">No Link Available</p>
-                                <?php
-                                    }
-                                ?>
+                                
                             </div>
                         </div>
 
@@ -328,7 +319,7 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                 <div class="card rounded-0 shadow-sm mt-4">
                     <h4 class="card-header">Post A Review</h4>
                     <div class="card-body">
-                        <form action="recipe.php?id=<?php echo urlencode($id); ?>" method="POST" class="mt-4">
+                        <form action="recipe.php?id=<?php echo urlencode($id); ?>" method="POST">
                             <div class="mb-3">
                                 <label for="rating" class="form-label">Your Rating:</label>
                                 <select name="rating" id="rating" class="form-select w-auto" required>
@@ -345,7 +336,7 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                                 <textarea name="comment" id="comment" class="form-control" rows="3" maxlength="500"></textarea>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-primary border-dark rounded-0" type="submit" name="action" value="review">Submit Rating</button>
+                                <button class="btn btn-primary rounded-0" type="submit" name="action" value="review">Submit Rating</button>
                             </div>
                         </form>
                     </div>
@@ -359,7 +350,7 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                             if (count($reviews) === 0) {
                         ?>
                             <div class="text-muted">No Reviews Yet
-                                <p class="text-muted" style="font-size: 0.75em">Be The First To Leave A Review!</p>
+                                <p class="text-muted" style="font-size: 0.85em">Be The First To Leave A Review!</p>
                             </div>
                         <?php
                             } else {
@@ -368,10 +359,9 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                                     $reviewRating = (int)($review['rating'] ?? 0);
                                     $reviewComment = $review['review'] ?? '';
                         ?>
-                        <!-- LEFT OFF HERE XXXXXXX-->
                                 <div class="border-bottom py-2">
-                                    <h5 class="text-decoration-underline fw-bold"><?php echo htmlspecialchars($reviewUsername)?></h5>
-                                    <h6><?php echo htmlspecialchars($reviewRating)?> / 5 &#9734;</h6>
+                                    <h5 class="fw-bold"><?php echo htmlspecialchars($reviewUsername)?></h5>
+                                    <h6><?php echo htmlspecialchars($reviewRating)?> / 5 &#9733;</h6>
                         <?php
                                     if ($reviewComment !== '') {
                         ?>
