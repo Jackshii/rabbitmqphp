@@ -32,6 +32,7 @@ function recipeSearch($info)
     {
         $cuisineArray=$info['cuisineType'];
         shuffle($cuisineArray);
+        $cuisineArray=json_decode($cuisineArray[0],true);
         $randomfavCuisine=$cuisineArray[0];
     }
     
