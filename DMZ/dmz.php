@@ -30,7 +30,7 @@ function recipeSearch($info)
     }
     if(!empty($info['cuisineType'])&& $info['type']=="recommendations")
     {
-        $cuisineArray=json_decode($info['cuisineType'][0],true);
+        $cuisineArray=$info['cuisineType'];
         shuffle($cuisineArray);
         $randomfavCuisine=$cuisineArray[0];
     }
