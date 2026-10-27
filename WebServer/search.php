@@ -83,7 +83,7 @@
                         ?>
                             <form action="search.php" method="POST">
                                 <div class="mb-3">
-                                    <label for="recipeQuery" class="form-label">Recipe</label>
+                                    <label for="recipeQuery" class="form-label">Enter a Recipe Below:</label>
                                     <input type="text" name="recipeQuery" maxlength="30" class="form-control" id="recipeQuery" placeholder="ex. Lasagna" required>
                                 </div>
                                 <div class="text-center mt-4">
