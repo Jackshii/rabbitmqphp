@@ -128,7 +128,6 @@
                                 $image = $recipe['image'] ?? '';
                                 $time = $recipe['totalTime'] ?? 0;
                                 $cals = round($recipe['average_calories'] ?? 0);
-
                                 if ($time > 0 ) {
                                     $time = $time . " Minutes";
                                 } else {
@@ -137,7 +136,7 @@
                         ?>
                             <div class="my-3">    
                                 <a class="list-group-item list-group-item-action d-flex align-items-center gap-3" target="_blank" href="recipe.php?id=<?php echo urlencode($id); ?>">
-                                    <img src="<?php echo htmlspecialchars($image); ?>" width="64" height="64" class="object-fit-cover flex-shrink-0 rounded" alt="Recipe Image">
+                                    <img src="<?php echo htmlspecialchars($image); ?>" width="64" height="64" class="object-fit-cover flex-shrink-0 rounded-0" alt="Recipe Image">
                                     <div>
                                         <h6 class="fw-bold mb-1"><?php echo htmlspecialchars($name); ?></h6>
                                         <p class="text-muted mb-0"><?php echo htmlspecialchars($cals); ?> Calories  -  <?php echo htmlspecialchars($time); ?></p>
