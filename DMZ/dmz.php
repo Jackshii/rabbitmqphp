@@ -28,10 +28,14 @@ function recipeSearch($info)
     {
         $diet= $info['diet'];
     }
-    if(isset($info['cuisineType'])&& $info['type']=="recommendations")
+    if(!empty($info['cuisineType'])&& $info['type']=="recommendations")
     {
         $cuisineArray=json_decode($info['cuisineType'][0],true);
         $randomfavCuisine=$cuisineArray[array_rand($cuisineArray)];//pick a a random cusine type from cuisine array
+    }
+    else
+    {
+        $randomfavCuisine="american";
     }
     
 
