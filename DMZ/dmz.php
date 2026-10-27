@@ -139,6 +139,8 @@ function recipeSearch($info)
             'diet'=>$recipeInfo['dietLabels'],
             'allergy'=>$recipeInfo['healthLabels'],
             'totalTime' => $recipeInfo['totalTime'],
+            'yield' => $recipeInfo['yield'],
+            'calories' => $recipeInfo['calories'],
             'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
             'cuisineType'=>$recipeInfo['cuisineType'],
         );
