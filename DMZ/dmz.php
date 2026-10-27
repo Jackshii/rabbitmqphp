@@ -10,15 +10,31 @@ function recipeSearch($info)
     $returnRecipesMatch= array();
     $condenseRecipes=array();
     $recipesMatch=array();
+    if(isset($info['ingredients']))
+    {
     if (is_array($info['ingredients']))
     {
-    $ingred=implode(' ',$info['ingredients']);
+    $recieve_ingred=$info['ingredients'];
+    shuffle($recieve_ingred);
+    $condenseIngreds=array_slice($recieve_ingred,0,3);
+    $ingred=implode(',',$condenseIngreds);
     }
     else
     {
     $ingred=$info['ingredients'];
     }
-    $diet= $info['diet'];
+    }
+    if(isset($info['diet']))
+    {
+        $diet= $info['diet'];
+    }
+    if(!empty($info['cuisineType'])&& $info['type']=="recommendations")
+    {
+        $cuisineArray=$info['cuisineType'];
+        shuffle($cuisineArray);
+        $cuisineArray=json_decode($cuisineArray[0],true);
+        $randomfavCuisine=$cuisineArray[0];
+    }
     
 
 
@@ -29,9 +45,15 @@ function recipeSearch($info)
 
     else
     {
-        $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
     
-  
+        if(!empty($info['ingredients']))
+        {
+            $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=" . urlencode($ingred) ."&app_id=". $api_id . "&app_key=". $api_key;
+        }
+        else
+        {
+            $APICall="https://api.edamam.com/api/recipes/v2?type=public&q=&app_id=". $api_id . "&app_key=". $api_key;
+        }
         if(!empty($diet))
             {
                 foreach($diet as $dietType)
@@ -40,15 +62,19 @@ function recipeSearch($info)
                 }
             
             }
+        if(!empty($randomfavCuisine))
+        {
+            $APICall=$APICall . "&cuisineType=" . urlencode($randomfavCuisine);
+        }
     }
+
     $recipesReturn= file_get_contents($APICall);
     $recipesPHP=json_decode($recipesReturn,true);
+
     if(isset($recipesPHP['_links']))
         {
             unset($recipesPHP['_links']); //remove api key from going out hopefully 
         }
-    $recipesMatch=$recipesPHP['hits'];
-    
     //return 1 recipe if recipe id is present hopefully :3
     if(!empty($info['id']))
         {
@@ -60,13 +86,18 @@ function recipeSearch($info)
             'image' => $recipeInfo['image'],
             'url' => $recipeInfo['url'],
             'ingredients' =>$recipeInfo['ingredientLines'],
+            'diet'=>$recipeInfo['dietLabels'],
+            'allergy'=>$recipeInfo['healthLabels'],
             'totalTime' => $recipeInfo['totalTime'],
-            'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
+            'yield' => $recipeInfo['yield'],
+            'calories' => $recipeInfo['calories'],
+            'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
+            'cuisineType'=>$recipeInfo['cuisineType'],
             );
             return $condenseRecipes;
         }
 
-
+    $recipesMatch=$recipesPHP['hits'];
 
     //sort via type
 
@@ -84,7 +115,7 @@ function recipeSearch($info)
             'name' => $recipeInfo['label'],
             'image' => $recipeInfo['image'],
             'totalTime' => $recipeInfo['totalTime'],
-            'average_calories'=> ($recipeInfo['calories']/$recipeInfo['yield']),
+            'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
         );
         
         }
@@ -92,7 +123,7 @@ function recipeSearch($info)
     }
 
 
-    else if($info['type']=="detailSearch")
+    else if($info['type']=="detailedSearch")
     {
         if(is_array($recipesMatch))
         {
@@ -110,18 +141,49 @@ function recipeSearch($info)
             'diet'=>$recipeInfo['dietLabels'],
             'allergy'=>$recipeInfo['healthLabels'],
             'totalTime' => $recipeInfo['totalTime'],
+            'yield' => $recipeInfo['yield'],
+            'calories' => $recipeInfo['calories'],
             'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
+            'cuisineType'=>$recipeInfo['cuisineType'],
         );
         
         }
         }
     }
+    
+    else if ($info['type']=="recommendations")
+    {
+        if(is_array($recipesMatch))
+        {
+        foreach(array_slice($recipesMatch,0,10) as $match)
+        {
+        $recipeInfo=$match['recipe'];
+
+        $condenseRecipes[]=array
+        (
+            'id' => str_replace('http://www.edamam.com/ontologies/edamam.owl#','',$recipeInfo['uri']),
+            'name' => $recipeInfo['label'],
+            'image' => $recipeInfo['image'],
+            'url' => $recipeInfo['url'],
+            'totalTime' => $recipeInfo['totalTime'],
+            'average_calories'=> round($recipeInfo['calories']/$recipeInfo['yield']),
+            'cuisineType'=>$recipeInfo['cuisineType'],
+        );
+        
+        }
+        }
+    }
+    else if (empty($info['cuisineType'])&& $info['type']=="recommendations")
+        {
+            return array();
+        }
 
 
 
-    $returnRecipesMatch['recipeSearch']=$condenseRecipes;
+    $returnRecipesMatch['recipeSearch']=$condenseRecipes; //didn't need this because it nest the returnarray, but it works lol. we are too far deep.
     
     return $returnRecipesMatch;
+
 }
 require('../path.inc');
 require('../get_host_info.inc');
