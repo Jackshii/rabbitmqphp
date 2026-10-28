@@ -32,7 +32,7 @@ function recipeSearch($info)
     {
         $cuisineArray=$info['cuisineType'];
         shuffle($cuisineArray);
-        $cuisineArray=json_decode($cuisineArray[0],true);
+        $cuisineArray=json_decode($cuisineArray[0]);
         $randomfavCuisine=$cuisineArray[0];
     }
     
@@ -69,7 +69,7 @@ function recipeSearch($info)
     }
 
     $recipesReturn= file_get_contents($APICall);
-    $recipesPHP=json_decode($recipesReturn,true);
+    $recipesPHP=json_decode($recipesReturn);
 
     if(isset($recipesPHP['_links']))
         {
