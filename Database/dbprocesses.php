@@ -39,16 +39,8 @@ function allreq($request) {
             $sqlconnection->query("insert into userdiet (userid, diet) values ('$userId', '$diet')");
         }
         
-        $result = $sqlconnection->query("select diet from userdiet where userid = '$userId'");
-        
-        $setD = array();
-        while ($dietinfo = $result->fetch_assoc()) {
-            $setD[] = $dietinfo['diet'];
-        }
-
         $dietA = array();
         $dietA['status'] = "success";
-        $dietA['dietInfo'] = $setD;
         return $dietA;
     } 
     else if ($type == 'getFridge') {
@@ -70,17 +62,11 @@ function allreq($request) {
         
         foreach ($info as $ingredient) {
             $sqlconnection->query("insert into userfridge (userid, ingredient) values ('$userId', '$ingredient')");            
-        }
-        $result = $sqlconnection->query("select ingredient from userfridge where userid = '$userId'");
-        $updateF = array();
-        while ($ingredientinfo = $result->fetch_assoc()) {
-            $updateF[] = $ingredientinfo['ingredient'];
-        }
+	}
 
         $fridgeA = array();
         $fridgeA['status'] = "success";
         $fridgeA['message'] = "Fridge updated";
-        $fridgeA['fridgeInfo'] = $updateF;
         return $fridgeA;
     }
     else if ($type == 'recipeSearch' || $type == 'fridgeSearch' || $type == 'detailedSearch' || $type == 'recommendationsRequest') {
@@ -202,8 +188,7 @@ function allreq($request) {
         
         if ($type == "setFavorite") {
             var_dump($request);
-            if ($sqlconnection->query("insert user_favorites (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals) select '$username', recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals from temp where recipe_id = '$recipe_id'")) {
-            $sqlconnection->query("update temp set isfav = 1 where username = '$username' and recipe_id = '$recipe_id'");    
+            if ($sqlconnection->query("insert ignore user_favorites (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals) select '$username', recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals from temp where recipe_id = '$recipe_id'")) {    
             return ['status' => 'success', 'message' => 'added to favorites'];
             } else {
                 return ['status' => 'error', 'message' => 'was not able to add to favorites'];
@@ -212,7 +197,6 @@ function allreq($request) {
 
         if ($type == 'removeFavorite') {  
             if ($sqlconnection->query("delete from user_favorites where username ='$username' and recipe_id= '$recipe_id'")) {
-                $sqlconnection->query("update temp set isfav = 0 where username = '$username' and recipe_id = '$recipe_id'");
                 return ['status' => 'success', 'message' => 'removed from favorites'];
             } else {
                 return ['status' => 'error', 'message' => 'was not able to remove from favorites'];
