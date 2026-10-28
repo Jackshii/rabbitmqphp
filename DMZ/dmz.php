@@ -18,7 +18,7 @@ function recipeSearch($info)
     shuffle($recieve_ingred);
     $condenseIngreds=array_slice($recieve_ingred,0,3);
     $ingred=implode(' OR ',$condenseIngreds);
-    if(isset($info['diet']))
+    if(isset($info['diet'])&&!empty($ingred))
     {
         $diet= $info['diet'];
     }
