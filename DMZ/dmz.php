@@ -18,15 +18,15 @@ function recipeSearch($info)
     shuffle($recieve_ingred);
     $condenseIngreds=array_slice($recieve_ingred,0,3);
     $ingred=implode(' OR ',$condenseIngreds);
+    if(isset($info['diet']))
+    {
+        $diet= $info['diet'];
+    }
     }
     else
     {
     $ingred=$info['ingredients'];
     }
-    }
-    if(isset($info['diet']))
-    {
-        $diet= $info['diet'];
     }
     if(!empty($info['cuisineType'])&& $info['type']=="recommendations")
     {
