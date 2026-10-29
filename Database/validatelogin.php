@@ -7,8 +7,7 @@ require_once('../connection.php');
 
 function login($user, $pass) {
 	global $sqlconnection;
-    $sql = "select id, password from logininfo where username = '$user'";
-    $result = $sqlconnection->query($sql);
+	$result = $sqlconnection->query("select id, password from logininfo where username = '$user'");
     if ($row = $result->fetch_assoc()) {
         $hash = $row['password'];
         if (password_verify($pass, $hash)) {

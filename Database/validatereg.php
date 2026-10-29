@@ -5,10 +5,8 @@ require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
 require_once('../connection.php');
 function register($user, $pass) {
-        global $sqlconnection; ;
-
-    $check="select * from logininfo where username = '$user'";
-    $checkdup=mysqli_query($sqlconnection, $check);
+        global $sqlconnection;
+	$checkdup=mysqli_query($sqlconnection, "select * from logininfo where username = '$user'");
     if ($checkdup->num_rows > 0) {
         return ["status" => "duplicate"];
     }
