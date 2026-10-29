@@ -69,7 +69,7 @@ function recipeSearch($info)
     }
 
     $recipesReturn= file_get_contents($APICall);
-    $recipesPHP=json_decode($recipesReturn);
+    $recipesPHP=json_decode($recipesReturn,true);
 
     if(isset($recipesPHP['_links']))
         {
