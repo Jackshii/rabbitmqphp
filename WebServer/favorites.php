@@ -13,7 +13,6 @@
     $failed = false;
 
     $request = array();
-    // ask eric if hes storing this data or just caching it
     $request['type'] = 'getFavorites';
     $request['session_key'] = $_SESSION['sessionToken'];
 

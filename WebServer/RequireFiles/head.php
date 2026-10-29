@@ -35,7 +35,7 @@
                             <!-- LOGOUT BUTTON -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-dark text-nowrap text-decoration-underline" data-bs-toggle="dropdown"><?php echo htmlspecialchars($_SESSION['username']) ?></a>
-                                <ul class="dropdown-menu play-dropdown text-center start-50 translate-middle-x">
+                                <ul class="dropdown-menu text-center start-50 translate-middle-x">
                                     <li><a class="dropdown-item text-dark px-1" href="logout.php">Logout</a></li>
                                 </ul>
                             </li>

@@ -103,7 +103,7 @@
                             } 
                         ?>
 
-                        <!-- RESULTS -->
+                        <!-- MESSAGES -->
                         <?php
                             if ($searched === true) {
                                 if ($message === "Failed") { 

@@ -289,9 +289,7 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                                     <p class="mb-1"><strong>Allergy Info:</strong> <?php echo htmlspecialchars((implode(', ', $allergies))) ?></p>
                                 <?php              
                                     }
-                                ?>
-
-                                
+                                ?>                     
                             </div>
                         </div>
 
