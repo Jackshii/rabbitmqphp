@@ -139,7 +139,7 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
 
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
+            <div class="col-12 col-md-10 col-lg-6 mt-5">
 
                 <!-- LOAD CHECK -->
                 <?php 
@@ -205,11 +205,11 @@ valid: <?php echo $id ? 'NO' : 'yes'; ?></pre>
                             <?php
                                 if ($isFavorite) {
                             ?>
-                                <button class="btn rounded-0 btn-warning text-nowrap" type="submit" name="action" value="unfavorited">&#9733;  Unsave Recipe</button>
+                                <button class="btn rounded-0 btn-warning flex-wrap gap-2" type="submit" name="action" value="unfavorited">&#9733;  Unsave Recipe</button>
                             <?php
                                 } else {
                             ?>
-                                <button class="btn rounded-0 btn-warning text-nowrap" type="submit" name="action" value="favorited">&#9734;  Save Recipe</button>
+                                <button class="btn rounded-0 btn-warning flex-wrap gap-2" type="submit" name="action" value="favorited">&#9734;  Save Recipe</button>
                             <?php
                                 }
                             ?>

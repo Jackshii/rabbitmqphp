@@ -52,7 +52,7 @@
         <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8 mt-5">
+                <div class="col-12 col-md-10 col-lg-6 mt-5">
                     <div class="card rounded-0">
                         <h3 class="card-header text-center">Enter Ingredients In Your Fridge Below</h3>
                         <div class="card-body">

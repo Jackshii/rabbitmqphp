@@ -53,7 +53,7 @@
         <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-10 col-lg-6 mt-5">
+                <div class="col-12 col-md-10 col-lg-6 mt-5">
                     <div class="card rounded-0 mt-5">
                         <h3 class="card-header text-center">Enter Dietary Restrictions Below</h3>
                         <div class="card-body">
