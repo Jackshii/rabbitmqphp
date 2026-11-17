@@ -5,17 +5,14 @@ require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
 require_once('../connection.php');
 function register($user, $pass) {
-        global $Host, $User, $Pass, $Name;
-        $db = new mysqli($Host, $User, $Pass, $Name);
-
-    $check="select * from logininfo where username = '$user'";
-    $checkdup=mysqli_query($db, $check);
+        global $sqlconnection;
+	$checkdup=mysqli_query($sqlconnection, "select * from logininfo where username = '$user'");
     if ($checkdup->num_rows > 0) {
         return ["status" => "duplicate"];
     }
     $hash = password_hash($pass, PASSWORD_DEFAULT);
     $sql = "insert into logininfo (username, password) values ('$user', '$hash')" ;
-    if ($db->query($sql)) {
+    if ($sqlconnection->query($sql)) {
         return ["status" => "success"];
     } else {
         return ["status" => "error"] ;
@@ -33,3 +30,4 @@ $server = new rabbitMQServer("../authBroker.ini", "registrationServer");
 echo "Registration Listener start" . PHP_EOL;
 $server->process_requests('request');
 ?> 
+
