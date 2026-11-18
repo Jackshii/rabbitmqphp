@@ -3,7 +3,7 @@
 require_once('../path.inc');
 require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
-require_once('../connection.php');
+require_once __DIR__ . '/../connection.php';
 
 function getuser($sqlconnection, $session) {
     $id = $sqlconnection->query("select id from logininfo where sessionkey = '$session'");
