@@ -8,6 +8,7 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $recipes = [];
     $failed = false;
@@ -23,6 +24,7 @@
         $recipes = $response['favorites'] ?? [];
     } else {
         $failed = true;
+        frontendLogError("ERROR", "favorites.php", "failed to get response");
     }
 ?>
 
@@ -38,7 +40,7 @@
         <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-8 col-lg-6 mt-5">
+                <div class="col-12 col-md-10 col-lg-6 mt-5">
                     <div class="card rounded-0 shadow-sm mt-5">
                         <h3 class="card-header text-center"><?php echo htmlspecialchars($_SESSION['username']); ?>'s Saved Recipes!</h3>
                         <div class="card-body">

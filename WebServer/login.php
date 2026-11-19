@@ -9,10 +9,12 @@
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $message = "";
     }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         require ('../path.inc');
         require ('../get_host_info.inc');
         require ('../rabbitMQLib.inc');
+        require ('../errorLog.php');
 
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -29,10 +31,12 @@
             $message = "Success";
             $_SESSION['sessionToken'] = $response['session_key'];
             $_SESSION['username'] = $response['username'];
+            frontendLogError("SUCCESS", "login.php", "login successful");
             header("Location: home.php");
             exit();
         } else {
             $message = "Failed";
+            frontendLogError("ERROR", "login.php", "login failed");
         }
     }
 ?>
@@ -53,7 +57,7 @@
         <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-10 col-lg-6 mt-5">
+                <div class="col-12 col-md-10 col-lg-6 mt-5">
                     <div class="card rounded-0 mt-5">
                         <h3 class="card-header text-center">Login Here</h3>
                         <div class="card-body">

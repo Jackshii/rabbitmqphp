@@ -8,6 +8,7 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $action = $_POST['action'] ?? '';
     $recipes = [];
@@ -27,6 +28,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             $recipes = $response['recipes'] ?? [];
         } else {
+            frontendLogError("ERROR", "search.php", "search by recipe failed");
             $message = "Failed";
         }
     }
@@ -43,6 +45,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             $recipes = $response['recipes'] ?? [];
         } else {
+            frontendLogError("ERROR", "search.php", "search by fridge failed");
             $message = "Failed";
         }
     }
@@ -56,7 +59,7 @@
     <!-- CARD BELOW -->
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
-            <div class="col-8 col-lg-6 mt-5">
+            <div class="col-12 col-md-10 col-lg-6 mt-5">
                 <div class="card rounded-0 shadow-sm mt-5">
                     <h3 class="card-header text-center">Search For A Recipe</h3>
                     <div class="card-body">
