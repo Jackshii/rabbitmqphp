@@ -3,7 +3,7 @@
 require_once('../path.inc');
 require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
-require_once('../connection.php');
+require_once __DIR__ . '/../connection.php';
 function register($user, $pass) {
         global $sqlconnection;
 	$checkdup=mysqli_query($sqlconnection, "select * from logininfo where username = '$user'");
@@ -30,4 +30,3 @@ $server = new rabbitMQServer("../authBroker.ini", "registrationServer");
 echo "Registration Listener start" . PHP_EOL;
 $server->process_requests('request');
 ?> 
-

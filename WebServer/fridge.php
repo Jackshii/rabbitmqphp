@@ -8,6 +8,7 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $message = "";
     $savedFridge = [];
@@ -27,6 +28,7 @@
         } else {
             $message = "Failed";
             $savedFridge = $_POST['fridge'] ?? [];
+            frontendLogError("ERROR", "fridge.php", "response failed");
         }
     } else {
         $request = array();
@@ -37,6 +39,9 @@
 
         if (is_array($response) && $response['status'] == 'success') {
         $savedFridge = $response['fridgeInfo'] ?? [];
+        }
+        else {
+            frontendLogError("ERROR", "fridge.php", "failed to load saved fridge items");
         }
     }
 ?>
@@ -52,7 +57,7 @@
         <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8 mt-5">
+                <div class="col-12 col-md-10 col-lg-6 mt-5">
                     <div class="card rounded-0">
                         <h3 class="card-header text-center">Enter Ingredients In Your Fridge Below</h3>
                         <div class="card-body">
@@ -69,7 +74,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="alert alert-danger mt-3 text-center py-2 px-3 d-inline-block">Error, Try Again!</div>
                                     </div>
-                                <?php 
+                                <?php
                                     }
                                 ?>
                                     <div class="row mt-3">

@@ -3,7 +3,7 @@
 require_once('../path.inc');
 require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
-require_once('../connection.php');
+require_once __DIR__ . '/../connection.php';
 
 function login($user, $pass) {
 	global $sqlconnection;
@@ -31,4 +31,3 @@ $server = new rabbitMQServer("../authBroker.ini", "loginServer");
 echo "Login Listener Start" . PHP_EOL;
 $server->process_requests('request');
 ?> 
-

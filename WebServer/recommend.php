@@ -8,6 +8,7 @@
     require('../path.inc');
     require('../get_host_info.inc');
     require('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $message = "";
     $savedRecommendations = [];
@@ -23,6 +24,7 @@
         $savedRecommendations = $response['recipes'] ?? [];
     } else {
         $message = "Failed";
+        frontendLogError("ERROR", "recommend.php", "failed to get response");
     }
 ?>
 
@@ -38,7 +40,7 @@
         <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-8 col-lg-6 mt-5">
+                <div class="col-12 col-md-10 col-lg-6 mt-5">
                     <div class="card rounded-0 shadow-sm mt-5">
                         <h3 class="card-header text-center">Recommendations For <?php echo htmlspecialchars($_SESSION['username']); ?></h3>
                         <div class="card-body">
@@ -52,6 +54,7 @@
                                 </div>
                             <?php
                                 } elseif (count($savedRecommendations) === 0) {
+                                    frontendLogError("WARNING", "recommend.php", "no recommended recipes found");
                             ?>
                                 <div class="d-flex justify-content-center">
                                     <div class="alert alert-warning mt-3 text-center py-2 px-3 d-inline-block">No Recommendations Found!

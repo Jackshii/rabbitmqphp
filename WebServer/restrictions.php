@@ -8,6 +8,7 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $message = "";
     $savedDiet = [];
@@ -25,6 +26,7 @@
             header("Location: restrictions.php?saved=1");
             exit();
         } else {
+            frontendLogError("ERROR", "restrictions.php", "failed to get response");
             $message = "Failed";
             $savedDiet = $_POST['diet'] ?? [];
         }
@@ -36,6 +38,7 @@
         if (is_array($response) && $response['status'] == 'success') {
         $savedDiet = $response['dietInfo'] ?? [];
         } else {
+            frontendLogError("ERROR", "restrictions.php", "failed to load saved restrictions");
             $message = "LoadFailed";
         }
     }
@@ -53,7 +56,7 @@
         <!-- CARD BELOW -->
         <div class="container mt-5 mb-5">
             <div class="row justify-content-center">
-                <div class="col-10 col-lg-6 mt-5">
+                <div class="col-12 col-md-10 col-lg-6 mt-5">
                     <div class="card rounded-0 mt-5">
                         <h3 class="card-header text-center">Enter Dietary Restrictions Below</h3>
                         <div class="card-body">
