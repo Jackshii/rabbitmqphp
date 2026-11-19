@@ -18,11 +18,12 @@ function recipeSearch($info)
     shuffle($recieve_ingred);
     $condenseIngreds=array_slice($recieve_ingred,0,3);
     $ingred=implode(',',$condenseIngreds);
+    dmzLogError("SUCCESS","dmz.php","Ingredient put into array");
     }
     else
     {
     $ingred=$info['ingredients'];
-    logError("WARNING", "dmz.php", "only one ingredient found");
+    dmzLogError("WARNING","dmz.php","recipe only has 1 ingredient");
     }
     }
     if(isset($info['diet']))
@@ -33,7 +34,7 @@ function recipeSearch($info)
     {
         $cuisineArray=$info['cuisineType'];
         shuffle($cuisineArray);
-        $cuisineArray=json_decode($cuisineArray[0],true);
+        $cuisineArray=json_decode($cuisineArray[0]);
         $randomfavCuisine=$cuisineArray[0];
     }
     
@@ -190,6 +191,6 @@ require('../path.inc');
 require('../get_host_info.inc');
 require('../rabbitMQLib.inc');
 require('../errorLog.php');
-$server = new rabbitMQServer("../apiBroker.ini","dmzServer");
+$server= new rabbitMQServer("../apiBroker.ini","dmzServer");
 $server->process_requests('recipeSearch');
 ?>
