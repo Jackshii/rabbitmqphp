@@ -18,11 +18,12 @@ function recipeSearch($info)
     shuffle($recieve_ingred);
     $condenseIngreds=array_slice($recieve_ingred,0,3);
     $ingred=implode(',',$condenseIngreds);
+    dmzLogError("SUCCESS","dmz.php","Ingredient put into array");
     }
     else
     {
     $ingred=$info['ingredients'];
-    logError("WARNING","dmz.php","recipe only has 1 ingredient");
+    dmzLogError("WARNING","dmz.php","recipe only has 1 ingredient");
     }
     }
     if(isset($info['diet']))
