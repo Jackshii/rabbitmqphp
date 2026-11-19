@@ -24,7 +24,7 @@
         $savedRecommendations = $response['recipes'] ?? [];
     } else {
         $message = "Failed";
-        logError("ERROR", "recommend.php", "failed to get response");
+        frontendLogError("ERROR", "recommend.php", "failed to get response");
     }
 ?>
 
@@ -54,7 +54,7 @@
                                 </div>
                             <?php
                                 } elseif (count($savedRecommendations) === 0) {
-                                    logError("WARNING", "recommend.php", "no recommended recipes found");
+                                    frontendLogError("WARNING", "recommend.php", "no recommended recipes found");
                             ?>
                                 <div class="d-flex justify-content-center">
                                     <div class="alert alert-warning mt-3 text-center py-2 px-3 d-inline-block">No Recommendations Found!

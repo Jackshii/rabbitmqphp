@@ -28,7 +28,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             $recipes = $response['recipes'] ?? [];
         } else {
-            logError("ERROR", "search.php", "search by recipe failed");
+            frontendLogError("ERROR", "search.php", "search by recipe failed");
             $message = "Failed";
         }
     }
@@ -45,7 +45,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             $recipes = $response['recipes'] ?? [];
         } else {
-            logError("ERROR", "search.php", "search by fridge failed");
+            frontendLogError("ERROR", "search.php", "search by fridge failed");
             $message = "Failed";
         }
     }
