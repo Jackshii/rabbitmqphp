@@ -8,6 +8,7 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $recipes = [];
     $failed = false;
@@ -23,6 +24,7 @@
         $recipes = $response['favorites'] ?? [];
     } else {
         $failed = true;
+        logError("ERROR", "favorites.php", "failed to get response");
     }
 ?>
 

@@ -8,6 +8,7 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $action = $_POST['action'] ?? '';
     $recipes = [];
@@ -27,6 +28,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             $recipes = $response['recipes'] ?? [];
         } else {
+            logError("ERROR", "search.php", "search by recipe failed");
             $message = "Failed";
         }
     }
@@ -43,6 +45,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             $recipes = $response['recipes'] ?? [];
         } else {
+            logError("ERROR", "search.php", "search by fridge failed");
             $message = "Failed";
         }
     }

@@ -8,12 +8,14 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $id = $_GET['id'] ?? '';
 
     // ID CHECK
     $idCheck = str_starts_with($id, 'recipe_') && strlen($id) == 39 && ctype_xdigit(substr($id, 7));
     if (!$idCheck ) {
+        logError("WARNING", "recipe.php", "non-valid recipeID for " . $id);
         header('Location: search.php');
         exit();
     }
@@ -39,6 +41,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             header("Location: recipe.php?id=" . $id . "&saved=true");
         } else {
+            logError("ERROR", "recipe.php", "could not favorite recipe " . $id);
             header("Location: recipe.php?id=" . $id . "&error=save");
         }
         exit();
@@ -56,6 +59,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             header("Location: recipe.php?id=" . $id . "&unsave=true");
         } else {
+            logError("ERROR", "recipe.php", "could not unfavorite recipe " . $id);
             header("Location: recipe.php?id=" . $id . "&error=unsave");
         }
         exit();
@@ -68,6 +72,7 @@
         $comment = trim($_POST['comment'] ?? '');
 
         if ($rating < 1 || $rating > 5) {
+            logError("WARNING", "recipe.php", "invalid rating for " . $id);
             header("Location: recipe.php?id=" . $id . "&error=rating");
             exit();
         }
@@ -84,6 +89,7 @@
         if (is_array($response) && $response['status'] == 'success') {
             header("Location: recipe.php?id=" . $id . "&reviewed=true");
         } else {
+            logError("ERROR", "recipe.php", "failed to get rating response for " . $id);
             header("Location: recipe.php?id=" . $id . "&error=review");
         }
         exit();
@@ -103,6 +109,7 @@
         $isFavorite = !empty($response['isfavorites']);
     } else {
         $loadFailed = true;
+        logError("ERROR", "recipe.php", "failed to get detailed search response for " . $id);
     }
 
     $name = $recipe['name'] ?? 'Recipe Name Not Found';

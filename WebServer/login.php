@@ -9,10 +9,12 @@
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $message = "";
     }
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         require ('../path.inc');
         require ('../get_host_info.inc');
         require ('../rabbitMQLib.inc');
+        require ('../errorLog.php');
 
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -29,10 +31,12 @@
             $message = "Success";
             $_SESSION['sessionToken'] = $response['session_key'];
             $_SESSION['username'] = $response['username'];
+            logError("SUCCESS", "login.php", "login successful");
             header("Location: home.php");
             exit();
         } else {
             $message = "Failed";
+            logError("ERROR", "login.php", "login failed");
         }
     }
 ?>

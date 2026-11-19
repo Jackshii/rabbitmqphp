@@ -8,6 +8,7 @@
     require ('../path.inc');
     require ('../get_host_info.inc');
     require ('../rabbitMQLib.inc');
+    require ('../errorLog.php');
 
     $message = "";
     $savedDiet = [];
@@ -25,6 +26,7 @@
             header("Location: restrictions.php?saved=1");
             exit();
         } else {
+            logError("ERROR", "restrictions.php", "failed to get response");
             $message = "Failed";
             $savedDiet = $_POST['diet'] ?? [];
         }
@@ -36,6 +38,7 @@
         if (is_array($response) && $response['status'] == 'success') {
         $savedDiet = $response['dietInfo'] ?? [];
         } else {
+            logError("ERROR", "restrictions.php", "failed to load saved restrictions");
             $message = "LoadFailed";
         }
     }
