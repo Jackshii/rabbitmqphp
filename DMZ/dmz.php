@@ -22,6 +22,7 @@ function recipeSearch($info)
     else
     {
     $ingred=$info['ingredients'];
+    logError("WARNING","dmz.php","recipe only has 1 ingredient");
     }
     }
     if(isset($info['diet']))
@@ -188,6 +189,7 @@ function recipeSearch($info)
 require('../path.inc');
 require('../get_host_info.inc');
 require('../rabbitMQLib.inc');
+require('../errorLog.php');
 $server= new rabbitMQServer("../apiBroker.ini","dmzServer");
 $server->process_requests('recipeSearch');
 ?>
