@@ -28,7 +28,7 @@
         } else {
             $message = "Failed";
             $savedFridge = $_POST['fridge'] ?? [];
-            logError("ERROR", "fridge.php", "response failed");
+            frontendLogError("ERROR", "fridge.php", "response failed");
         }
     } else {
         $request = array();
@@ -41,7 +41,7 @@
         $savedFridge = $response['fridgeInfo'] ?? [];
         }
         else {
-            logError("ERROR", "fridge.php", "failed to load saved fridge items");
+            frontendLogError("ERROR", "fridge.php", "failed to load saved fridge items");
         }
     }
 ?>

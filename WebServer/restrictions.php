@@ -26,7 +26,7 @@
             header("Location: restrictions.php?saved=1");
             exit();
         } else {
-            logError("ERROR", "restrictions.php", "failed to get response");
+            frontendLogError("ERROR", "restrictions.php", "failed to get response");
             $message = "Failed";
             $savedDiet = $_POST['diet'] ?? [];
         }
@@ -38,7 +38,7 @@
         if (is_array($response) && $response['status'] == 'success') {
         $savedDiet = $response['dietInfo'] ?? [];
         } else {
-            logError("ERROR", "restrictions.php", "failed to load saved restrictions");
+            frontendLogError("ERROR", "restrictions.php", "failed to load saved restrictions");
             $message = "LoadFailed";
         }
     }

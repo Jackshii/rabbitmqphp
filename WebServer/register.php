@@ -27,10 +27,10 @@
         if (is_array($response) && $response['status'] == 'success') {
             $message = "Success";
         } elseif (is_array($response) && $response['status'] == 'duplicate') {
-            logError("WARNING", "register.php", "duplicate user registry attempt");
+            frontendLogError("WARNING", "register.php", "duplicate user registry attempt");
             $message = "Duplicate";
         } else {
-            logError("ERROR", "register.php", "failed to get response");
+            frontendLogError("ERROR", "register.php", "failed to get response");
             $message = "Failed";
         }
     }

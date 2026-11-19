@@ -31,12 +31,12 @@
             $message = "Success";
             $_SESSION['sessionToken'] = $response['session_key'];
             $_SESSION['username'] = $response['username'];
-            logError("SUCCESS", "login.php", "login successful");
+            frontendLogError("SUCCESS", "login.php", "login successful");
             header("Location: home.php");
             exit();
         } else {
             $message = "Failed";
-            logError("ERROR", "login.php", "login failed");
+            frontendLogError("ERROR", "login.php", "login failed");
         }
     }
 ?>

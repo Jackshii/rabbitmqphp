@@ -24,7 +24,7 @@
         $recipes = $response['favorites'] ?? [];
     } else {
         $failed = true;
-        logError("ERROR", "favorites.php", "failed to get response");
+        frontendLogError("ERROR", "favorites.php", "failed to get response");
     }
 ?>
 
