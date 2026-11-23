@@ -18,7 +18,6 @@ function recipeSearch($info)
     shuffle($recieve_ingred);
     $condenseIngreds=array_slice($recieve_ingred,0,3);
     $ingred=implode(',',$condenseIngreds);
-    dmzLogError("SUCCESS","dmz.php","Ingredient put into array");
     }
     else
     {
@@ -122,6 +121,10 @@ function recipeSearch($info)
         
         }
         }
+        else
+        {
+            dmzLogError("ERROR","dmz.php","RecipeSearch Failed");
+        }
     }
 
 
@@ -151,6 +154,10 @@ function recipeSearch($info)
         
         }
         }
+        else
+        {
+            dmzLogError("ERROR","dmz.php","Detailed Search Failed");
+        }
     }
     
     else if ($info['type']=="recommendations")
@@ -174,6 +181,10 @@ function recipeSearch($info)
         
         }
         }
+        else
+        {
+            dmzLogError("ERROR","dmz.php","Recommendations Search Failed");
+        }
     }
     else if (empty($info['cuisineType'])&& $info['type']=="recommendations")
         {
@@ -183,7 +194,7 @@ function recipeSearch($info)
 
 
     $returnRecipesMatch['recipeSearch']=$condenseRecipes; //didn't need this because it nest the returnarray, but it works lol. we are too far deep.
-    
+    dmzLogError("Success","dmz.php","return array filled");
     return $returnRecipesMatch;
 
 }
