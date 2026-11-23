@@ -31,6 +31,8 @@ class rabbitMQServer
 		$this->queue = $this->machine[$server]["QUEUE"];
 		$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
 		$this->routing_key = $this->machine[$server]["ROUTING_KEY"];
+                //Add required section for TLS
+		$this->CACERT = $this->machine[$server]["CACERT"];
 
 		if (isset( $this->machine[$server]["AUTO_DELETE"]))
 		{
@@ -73,6 +75,12 @@ class rabbitMQServer
       $params['login'] = $this->USER;
       $params['password'] = $this->PASSWORD;
       $params['vhost'] = $this->VHOST;
+             //Establish TLS connection. Conditional statement to ensure that the CA path and checks that the broker cert is signed
+      if (!empty($this->CACERT)) {
+               $params['cacert'] = $this->CACERT;
+               $params['verify'] = true;
+      }
+
 			$conn = new AMQPConnection($params);
 			$conn->connect();
 			$channel = new AMQPChannel($conn);
@@ -116,6 +124,12 @@ class rabbitMQServer
       $params['login'] = $this->USER;
       $params['password'] = $this->PASSWORD;
       $params['vhost'] = $this->VHOST;
+             //Establish TLS connection. Conditional statement to ensure that the CA path and checks that the broker cert is signed
+      if (!empty($this->CACERT)) {
+               $params['cacert'] = $this->CACERT;
+               $params['verify'] = true;
+      }
+
 			$conn = new AMQPConnection($params);
 			$conn->connect();
 
@@ -174,6 +188,8 @@ class rabbitMQClient
 		$this->queue = $this->machine[$server]["QUEUE"];
 		$this->exchange_type = $this->machine[$server]["EXCHANGE_TYPE"];
 		$this->routing_key = $this->machine[$server]["ROUTING_KEY"];
+		//Add required section for TLS
+		$this->CACERT = $this->machine[$server]["CACERT"];
 
 		if (isset( $this->machine[$server]["AUTO_DELETE"]))
 		{
@@ -218,7 +234,11 @@ class rabbitMQClient
       //Add params for both read/connection time out
       $params['read_timeout'] = 20;
       $params['connect_timeout'] = 10;
-
+       //Establish TLS connection. Conditional statement to ensure that the CA path and checks that the broker cert is signed
+      if (!empty($this->CACERT)) {
+               $params['cacert'] = $this->CACERT;
+               $params['verify'] = true;
+      }
 
 
 			$conn = new AMQPConnection($params);
@@ -279,6 +299,12 @@ class rabbitMQClient
       $params['login'] = $this->USER;
       $params['password'] = $this->PASSWORD;
       $params['vhost'] = $this->VHOST;
+
+      //Establish TLS connection. Conditional statement to ensure that the CA path and checks that the broker cert is signed
+      if (!empty($this->CACERT)) {
+	      $params['cacert'] = $this->CACERT;
+	      $params['verify'] = true;
+      }
 			$conn = new AMQPConnection($params);
 			$conn->connect();
 			$channel = new AMQPChannel($conn);
