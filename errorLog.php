@@ -4,7 +4,7 @@
         $user = $_SESSION['username'] ?? 'user-N/A';
         $log = date('Y-m-d H:i:s') . " " . gethostname() . " " . $level . " " . $page . " (" . $user . "): " . $error;
 
-        $client = new rabbitMQClient("logBroker.ini", "Web Log Listener");
+        $client = new rabbitMQClient("../logBroker.ini", "Web Log Listener");
         $client->publish(array('log' => $log));
     }
 
@@ -13,7 +13,7 @@
         $user = $_SESSION['username'] ?? 'user-N/A';
         $log = date('Y-m-d H:i:s') . " " . gethostname() . " " . $level . " " . $page . " (" . $user . "): " . $error;
 
-        $client = new rabbitMQClient("logBroker.ini", "Backend Listener");
+        $client = new rabbitMQClient("../logBroker.ini", "Backend Listener");
         $client->publish(array('log' => $log));
     }
 
@@ -22,7 +22,7 @@
         $user = $_SESSION['username'] ?? 'user-N/A';
         $log = date('Y-m-d H:i:s') . " " . gethostname() . " " . $level . " " . $page . " (" . $user . "): " . $error;
 
-        $client = new rabbitMQClient("logBroker.ini", "DMZ Listener");
+        $client = new rabbitMQClient("../logBroker.ini", "DMZ Listener");
         $client->publish(array('log' => $log));
     }
 ?>
