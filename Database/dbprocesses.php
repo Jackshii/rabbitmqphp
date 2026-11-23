@@ -4,6 +4,7 @@ require_once('../path.inc');
 require_once('../get_host_info.inc');
 require_once('../rabbitMQLib.inc');
 require_once __DIR__ . '/../connection.php';
+require ('../errorLog.php');
 
 function getuser($sqlconnection, $session) {
     $id = $sqlconnection->query("select id from logininfo where sessionkey = '$session'");
@@ -33,12 +34,21 @@ function allreq($request) {
     } 
     else if ($type == 'setDiet') {
         $info = $request['dietInfo'];
-        $sqlconnection->query("delete from userdiet where userid = '$userId'");
+	if( $sqlconnection->query("delete from userdiet where userid = '$userId'")){
+	dbLogError("SUCESS", "dbprocesses.php", "setDiet delete succeeded for user");
+	}
+	else{
+	dbLogError("Error", "dbprocesses.php", "setDiet delete failed for user");
 
+	}
         foreach ($info as $diet) {
-            $sqlconnection->query("insert into userdiet (userid, diet) values ('$userId', '$diet')");
-        }
-        
+		if($sqlconnection->query("insert into userdiet (userid, diet) values ('$userId', '$diet')")){
+			dbLogError("SUCESS", "dbprocesses.php", "setDiet insert succeeded for user");
+		}
+		else{
+			dbLogError("Error", "dbprocesses.php", "setDiet insert failed for user");
+		}
+	}        
         $dietA = array();
         $dietA['status'] = "success";
         return $dietA;
@@ -50,7 +60,7 @@ function allreq($request) {
         while ($fridgeinfo = $result->fetch_assoc()) {
             $getF[] = $fridgeinfo['ingredient'];
         }
-
+   
         $fridgeA = array();
         $fridgeA['status'] = "success";
         $fridgeA['fridgeInfo'] = $getF;
@@ -58,12 +68,21 @@ function allreq($request) {
     } 
     else if ($type == 'setFridge') {
         $info = $request['fridgeInfo'];
-        $sqlconnection->query("delete from userfridge where userid = '$userId'");
+	if($sqlconnection->query("delete from userfridge where userid = '$userId'")){
+		dbLogError("SUCESS", "dbprocesses.php", "setFridge delete succeeded for user");
+	}
+	else{
+		dbLogError("SUCESS", "dbprocesses.php", "setFridge delete failed for user");
+	}
         
         foreach ($info as $ingredient) {
-            $sqlconnection->query("insert into userfridge (userid, ingredient) values ('$userId', '$ingredient')");            
+		if($sqlconnection->query("insert into userfridge (userid, ingredient) values ('$userId', '$ingredient')")){
+		 dbLogError("SUCESS", "dbprocesses.php", "setFridge insert succeeded for user");		
+		}
+		else{
+			dbLogError("SUCESS", "dbprocesses.php", "setFridge insert succeeded for user");
+		}
 	}
-
         $fridgeA = array();
         $fridgeA['status'] = "success";
         $fridgeA['message'] = "Fridge updated";
@@ -150,7 +169,12 @@ function allreq($request) {
             $yield=$getrecipe['yield'];
             $calories=$getrecipe['calories'];
             $average_calories = $getrecipe['average_calories'];
-            $sqlconnection->query("insert into temp (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals) values ('$setuser', '$recipe_id', '$recipe_name', '$image', '$url', '$ingredients', '$diet', '$allergy', '$cuisineType', '$totalTime', '$average_calories', '$yield', '$calories')");
+	    if( $sqlconnection->query("insert into temp (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals) values ('$setuser', '$recipe_id', '$recipe_name', '$image', '$url', '$ingredients', '$diet', '$allergy', '$cuisineType', '$totalTime', '$average_calories', '$yield', '$calories')")){
+		    dbLogError("SUCESS", "dbprocesses.php", "insert into temp succeeded for user");
+	    }
+else {
+                dbLogError("ERROR", "dbprocesses.php", "insert into temp failed for user");
+            }
             $checkfav = $sqlconnection->query("select * from user_favorites where username = '$setuser' and recipe_id = '$recipe_id'");
             if ($checkfav->num_rows > 0) {
                 $is_fav = 1;
@@ -189,16 +213,20 @@ function allreq($request) {
         if ($type == "setFavorite") {
             var_dump($request);
             if ($sqlconnection->query("insert ignore user_favorites (username, recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals) select '$username', recipe_id, recipe_name, image, url, ingredients, diet, allergy, cuisineType, totalTime, average_calories, yield, cals from temp where recipe_id = '$recipe_id'")) {    
-            return ['status' => 'success', 'message' => 'added to favorites'];
-            } else {
+		    dbLogError("SUCESS", "dbprocesses.php", "setFavorite succeeded for user");
+		    return ['status' => 'success', 'message' => 'added to favorites'];
+	    } else {
+		    dbLogError("ERROR", "dbprocesses.php", "setFavorite failed for user");
                 return ['status' => 'error', 'message' => 'was not able to add to favorites'];
             }
         }
 
         if ($type == 'removeFavorite') {  
             if ($sqlconnection->query("delete from user_favorites where username ='$username' and recipe_id= '$recipe_id'")) {
-                return ['status' => 'success', 'message' => 'removed from favorites'];
-            } else {
+		    dbLogError("SUCESS", "dbprocesses.php", "removeFavorite succeeded for user");
+		    return ['status' => 'success', 'message' => 'removed from favorites'];
+	    } else {
+		    dbLogError("ERROR", "dbprocesses.php", "removeFavorite failed for user");
                 return ['status' => 'error', 'message' => 'was not able to remove from favorites'];
             }
         }
@@ -229,8 +257,17 @@ function allreq($request) {
         $recipeID = $request['id'];
         $review = $request['comment'];
         $rating = $request['rating'];
-        $sqlconnection->query("delete from ratereview where username = '$setU' and  recipeID = '$recipeID'"); 
-        $sqlconnection->query("insert into ratereview (username, recipeID, review, rating) values ('$setU', '$recipeID','$review','$rating')");
+	if($sqlconnection->query("delete from ratereview where username = '$setU' and  recipeID = '$recipeID'")){
+	            dbLogError("SUCESS", "dbprocesses.php", "setReview delete succeeded for user");
+        } else {
+            dbLogError("ERROR", "dbprocesses.php", "setReview delete failed for user");
+        }
+	if($sqlconnection->query("insert into ratereview (username, recipeID, review, rating) values ('$setU', '$recipeID','$review','$rating')")){
+		dbLogError("SUCESS", "dbprocesses.php", "setReview delete succeeded for user");
+        } else {
+            dbLogError("ERROR", "dbprocesses.php", "setReview delete failed for user");
+        }
+
         var_dump($request);
         $ratingA = array();
         $ratingA['status'] = "success";
